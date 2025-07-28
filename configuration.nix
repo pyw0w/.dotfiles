@@ -84,29 +84,6 @@ in
     hostname = "nix"; # Change to your preferred hostname
     timezone = "Asia/Yekaterinburg"; # Change to your timezone
     locale = "en_US.UTF-8"; # Change to your preferred locale
-
-    /*
-      Optionally edit the below values, or leave to use hydenix defaults
-      visit ./modules/hm/default.nix for more options
-
-      audio.enable = true; # enable audio module
-      boot = {
-        enable = true; # enable boot module
-        useSystemdBoot = true; # disable for GRUB
-        grubTheme = "Retroboot"; # or "Pochita"
-        grubExtraConfig = ""; # additional GRUB configuration
-        kernelPackages = pkgs.linuxPackages_zen; # default zen kernel
-      };
-      gaming.enable = true; # enable gaming module
-      hardware.enable = true; # enable hardware module
-      network.enable = true; # enable network module
-      nix.enable = true; # enable nix module
-      sddm = {
-        enable = true; # enable sddm module
-        theme = "Candy"; # or "Corners"
-      };
-      system.enable = true; # enable system module
-    */
   };
 
   #! EDIT THESE VALUES (must match users defined above)
