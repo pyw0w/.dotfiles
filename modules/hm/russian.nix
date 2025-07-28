@@ -12,6 +12,10 @@
     pkgs.xorg.xkbcomp
     # For notifications
     pkgs.libnotify
+    # CUDA development tools
+    pkgs.cudaPackages.cudatoolkit
+    pkgs.cudaPackages.cudnn
+    pkgs.cudaPackages.tensorrt
   ];
 
   # Environment variables for better Russian support

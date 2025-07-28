@@ -39,7 +39,7 @@ in
 
     #! EDIT THIS SECTION
     # For NVIDIA setups
-    #inputs.hydenix.inputs.nixos-hardware.nixosModules.common-gpu-nvidia
+    inputs.hydenix.inputs.nixos-hardware.nixosModules.common-gpu-nvidia
 
     # For AMD setups
     # inputs.hydenix.inputs.nixos-hardware.nixosModules.common-gpu-amd
@@ -83,7 +83,7 @@ in
     #! EDIT THESE VALUES
     hostname = "nix"; # Change to your preferred hostname
     timezone = "Asia/Yekaterinburg"; # Change to your timezone
-    locale = "en_US.UTF-8"; # Change to your preferred locale
+    locale = "ru_RU.UTF-8"; # Change to your preferred locale
   };
 
   #! EDIT THESE VALUES (must match users defined above)
