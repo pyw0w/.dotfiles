@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   imports = [
@@ -7,6 +7,7 @@
 
   # home-manager options go here
   home.packages = [
+    pkgs.code-cursor
     # pkgs.vscode - hydenix's vscode version
     # pkgs.userPkgs.vscode - your personal nixpkgs version
   ];
@@ -19,26 +20,7 @@
       ! Below are defaults, no need to uncomment them all
       comma.enable = true; # useful nix tool to run software without installing it first
       dolphin.enable = true; # file manager
-      editors = {
-        enable = true; # enable editors module
-        neovim = true; # enable neovim module
-        neovim = true; # enable neovim module
-        vscode = {
-          enable = true; # enable vscode module
-          wallbash = true; # enable wallbash extension for vscode
-        };
-        vim = true; # enable vim module
-        default = "code"; # default text editor
-        vim = true; # enable vim module
-        default = "code"; # default text editor
-      };
       fastfetch.enable = true; # fastfetch configuration
-      firefox.enable = true; # enable firefox module
-      git = {
-        enable = true; # enable git module
-        name = null; # git user name eg "John Doe"
-        email = null; # git user email eg "john.doe@example.com"
-      };
       hyde.enable = true; # enable hyde module
       hyprland = {
         enable = true; # enable hyprland module
@@ -72,13 +54,6 @@
         p10k.enable = false; # enable p10k prompt
         starship.enable = true; # enable starship prompt
       };
-      social = {
-        enable = true; # enable social module
-        discord.enable = true; # enable discord module
-        webcord.enable = true; # enable webcord module
-        vesktop.enable = true; # enable vesktop module
-      };
-      spotify.enable = true; # enable spotify module
       swww.enable = true; # enable swww wallpaper daemon
       terminals = {
         enable = true; # enable terminals module
@@ -87,14 +62,6 @@
           configText = ""; # kitty config text
         };
       };
-      theme = {
-        enable = true; # enable theme module
-        active = "Catppuccin Mocha"; # active theme name
-        themes = [
-          "Catppuccin Mocha"
-          "Catppuccin Latte"
-        ]; # default enabled themes, full list in https://github.com/richen604/hydenix/tree/main/hydenix/sources/themes
-      };
       waybar = {
         enable = true; # enable waybar module
         userStyle = ""; # custom waybar user-style.css
@@ -102,5 +69,35 @@
       wlogout.enable = true; # enable wlogout module
       xdg.enable = true; # enable xdg module
     */
+    editors = {
+      enable = true; # enable editors module
+      neovim = false; # enable neovim module
+      vscode = {
+        enable = false; # enable vscode module
+        wallbash = true; # enable wallbash extension for vscode
+      };
+      default = "cursor"; # default text editor
+    };
+    theme = {
+      enable = true; # enable theme module
+      active = "Tokyo Night"; # active theme name
+      themes = [
+        "Catppuccin Mocha"
+        "Tokyo Night"
+      ]; # default enabled themes, full list in https://github.com/richen604/hydenix/tree/main/hydenix/sources/themes
+    };
+    spotify.enable = false; # enable spotify module
+    social = {
+      enable = true; # enable social module
+      discord.enable = false; # enable discord module
+      webcord.enable = false; # enable webcord module
+      vesktop.enable = true; # enable vesktop module
+    };
+    git = {
+      enable = true; # enable git module
+      name = "pyw0w"; # git user name eg "John Doe"
+      email = "myxi2002@gmail.com"; # git user email eg "john.doe@example.com"
+    };
+    firefox.enable = true; # enable firefox module
   };
 }
