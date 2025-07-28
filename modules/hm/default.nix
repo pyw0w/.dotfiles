@@ -69,6 +69,7 @@
     editors = {
       enable = true; # enable editors module
       neovim = false; # enable neovim module
+      vim = false; # enable vim module
       vscode = {
         enable = false; # enable vscode module
         wallbash = true; # enable wallbash extension for vscode
