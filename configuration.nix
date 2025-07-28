@@ -70,7 +70,7 @@ in
         imports = [
           inputs.hydenix.lib.homeModules
           # Nix-index-database - for comma and command-not-found
-          inputs.nix-index-database.hmModules.nix-index
+          inputs.nix-index-database.homeModules.nix-index
           ./modules/hm
         ];
       };
@@ -97,6 +97,14 @@ in
       # Add other groups as needed
     ];
     shell = pkgs.zsh; # Change if you prefer a different shell
+  };
+
+  # NH - NixOS helper for updates
+  programs.nh = {
+    enable = true;
+    clean.enable = true;
+    clean.extraArgs = "--keep-since 4d --keep 3";
+    flake = "/home/pyw0w/.dotfiles"; # sets NH_OS_FLAKE variable for you
   };
 
   system.stateVersion = "25.05";

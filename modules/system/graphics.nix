@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 
 { 
   # Minimal NVIDIA configuration for desktop RTX 3060
@@ -8,15 +8,14 @@
     open = true;
   };
 
-  # OpenGL support
-  hardware.opengl = {
+  # Graphics support
+  hardware.graphics = {
     enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
+    enable32Bit = true;
   };
 
   # CUDA packages
-  environment.systemPackages = with config.boot.kernelPackages; [
+  environment.systemPackages = with pkgs; [
     cudaPackages.cudatoolkit
     cudaPackages.cudnn
   ];
