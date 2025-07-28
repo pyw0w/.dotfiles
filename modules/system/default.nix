@@ -2,11 +2,10 @@
 
 {
   imports = [
-    # ./example.nix - add your modules here
+    ./graphics.nix
+    ./russian.nix
   ];
 
   environment.systemPackages = [
-    # pkgs.vscode - hydenix's vscode version
-    # pkgs.userPkgs.vscode - your personal nixpkgs version
   ];
 }

@@ -3,6 +3,7 @@
 {
   imports = [
     # ./example.nix - add your modules here
+    ./russian.nix
   ];
 
   # home-manager options go here
@@ -22,10 +23,6 @@
       dolphin.enable = true; # file manager
       fastfetch.enable = true; # fastfetch configuration
       hyde.enable = true; # enable hyde module
-      hyprland = {
-        enable = true; # enable hyprland module
-        extraConfig = ""; # extra hyprland config text
-      };
       lockscreen = {
         enable = true; # enable lockscreen module
         hyprlock = true; # enable hyprlock lockscreen
@@ -99,5 +96,20 @@
       email = "myxi2002@gmail.com"; # git user email eg "john.doe@example.com"
     };
     firefox.enable = true; # enable firefox module
+    hyprland = {
+      enable = true; # enable hyprland module
+                extraConfig = ''
+          # Keyboard configuration
+          input {
+            kb_layout = us,ru
+            kb_options = grp:alt_shift_toggle
+          }
+          
+          # Keyboard language switcher
+          bind = ALT, SHIFT, exec, hyprctl switchxkblayout at-translated-set-2-keyboard next
+          
+
+        '';
+    };
   };
 }
