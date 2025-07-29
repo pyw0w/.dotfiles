@@ -9,9 +9,10 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    yandex-music.url = "github:cucumber-sp/yandex-music-linux";
   };
 
-  outputs = { hydenix, ... }@inputs:
+  outputs = { hydenix, yandex-music, ... }@inputs:
     let
       hostname = "nix";
       system = hydenix.lib.system;
