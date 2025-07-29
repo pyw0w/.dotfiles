@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 {
   imports = [
@@ -8,7 +8,9 @@
 
   # home-manager options go here
   home.packages = [
+    inputs.zen-browser.packages.${pkgs.system}.default
     pkgs.code-cursor
+    pkgs.zed-editor
     # pkgs.vscode - hydenix's vscode version
     # pkgs.userPkgs.vscode - your personal nixpkgs version
   ];
@@ -105,11 +107,8 @@
             kb_layout = us,ru
             kb_options = grp:alt_shift_toggle
           }
-          
           # Keyboard language switcher
           bind = ALT, SHIFT, exec, hyprctl switchxkblayout at-translated-set-2-keyboard next
-          
-
         '';
     };
   };
