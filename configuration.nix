@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ inputs, lib, ... }:
 let
   pkgs = import inputs.hydenix.inputs.hydenix-nixpkgs {
     inherit (inputs.hydenix.lib) system;
@@ -7,6 +7,11 @@ let
       inputs.hydenix.lib.overlays
       (final: prev: {
         userPkgs = import inputs.nixpkgs { config.allowUnfree = true; };
+        # Override Cursor with version from nixpkgs unstable
+        code-cursor = (import inputs.nixpkgs-unstable {
+          system = inputs.hydenix.lib.system;
+          config.allowUnfree = true;
+        }).code-cursor;
       })
     ];
   };
@@ -49,9 +54,17 @@ in {
   ];
 
   home-manager = {
-    useGlobalPkgs = true;
+    useGlobalPkgs = false;
     useUserPackages = true;
-    extraSpecialArgs.inputs = inputs;
+    backupFileExtension = "backup";
+    extraSpecialArgs = { 
+      inherit inputs;
+      pkgs = pkgs;
+      unstable = (import inputs.nixpkgs {
+        system = inputs.hydenix.lib.system;
+        config.allowUnfree = true;
+      });
+    };
     users."pyw0w" = { ... }: {
       imports = [
         inputs.hydenix.lib.homeModules
