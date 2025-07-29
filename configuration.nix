@@ -29,6 +29,8 @@ in {
         "mirror.iscas.ac.cn-nix-channels:APySiQHDIQyE7Po8ev3xsodtNc2X11qo6idbwMl3HFA="
         "mirrors.tuna.tsinghua.edu.cn-nix-channels:APySiQHDIQyE7Po8ev3xsodtNc2X11qo6idbwMl3HFA="
       ];
+      max-jobs = "auto";
+      cores = 0;
     };
   };
 

@@ -4,6 +4,7 @@
   imports = [
     # ./example.nix - add your modules here
     ./russian.nix
+    ../dev
   ];
 
   # home-manager options go here
@@ -98,7 +99,7 @@
       name = "pyw0w"; # git user name eg "John Doe"
       email = "myxi2002@gmail.com"; # git user email eg "john.doe@example.com"
     };
-    firefox.enable = true; # enable firefox module
+    firefox.enable = false; # enable firefox module
     hyprland = {
       enable = true; # enable hyprland module
                 extraConfig = ''
