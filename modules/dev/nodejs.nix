@@ -3,7 +3,7 @@
 {
   home.packages = with pkgs; [
     # Node.js
-    nodejs_20
+    nodejs_22
     nodePackages.npm
     
     # Basic tools

@@ -1,7 +1,7 @@
 {
   imports = [
-    ./python.nix
-    ./nodejs.nix
-    ./zig.nix
+    #./python.nix
+    #./nodejs.nix
+    #./zig.nix
   ];
 }
