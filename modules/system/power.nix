@@ -2,7 +2,7 @@
 
 {
   # Disable automatic screen blanking
-  services.xserver.displayManager.defaultSession = "hyprland";
+  services.displayManager.defaultSession = "hyprland";
   
   # Power management settings
   services.logind = {
