@@ -4,6 +4,7 @@
   imports = [
     # ./example.nix - add your modules here
     ./russian.nix
+    ./scripts.nix
     ../dev
     inputs.yandex-music.homeManagerModules.default
   ];
@@ -117,6 +118,26 @@
           }
           # Keyboard language switcher
           bind = ALT, SHIFT, exec, hyprctl switchxkblayout at-translated-set-2-keyboard next
+          
+          # Disable automatic screen blanking
+          misc {
+            disable_autoreload = true
+          }
+          
+          # Power management - disable screen blanking
+          general {
+            allow_tearing = false
+          }
+          
+          # Disable automatic screen blanking
+          env = XDG_SESSION_TYPE,wayland
+          env = XDG_CURRENT_DESKTOP,Hyprland
+          
+          # Screen management shortcuts
+          bind = SUPER, F1, exec, ~/.local/bin/toggle-screen
+          bind = SUPER, F2, exec, ~/.local/bin/disable-screen-blanking
+          bind = SUPER, F3, exec, hyprctl dispatch dpms off
+          bind = SUPER, F4, exec, hyprctl dispatch dpms on
         '';
     };
   };
