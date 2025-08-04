@@ -45,7 +45,7 @@
   };
 
   # Функции для nh
-  programs.zsh.initExtra = ''
+  programs.zsh.initContent = ''
     # Функция для быстрого переключения с прогрессом
     nsw-progress() {
       echo "🚀 Начинаю переключение системы..."
