@@ -19,10 +19,7 @@
   ];
 
   # Minecraft configuration
-  home.file.".local/share/minecraft" = {
-    target = ".minecraft";
-    recursive = true;
-  };
+  # Note: Minecraft folder will be created automatically by PrismLauncher
 
   # Create Minecraft launcher shortcuts
   home.file.".local/bin/minecraft" = {
