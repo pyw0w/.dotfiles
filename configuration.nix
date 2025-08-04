@@ -168,18 +168,8 @@ in {
       NIX_BUILD_CORES = "0";
       NIX_REMOTE = "daemon";
       # Переменные для подробного вывода
-      NIX_DEBUG = "1";
-      NIX_SHOW_STATS = "1";
+     
     };
-  };
-
-  # Переменные окружения для пользователя
-  environment.variables = {
-    # Подробный вывод Nix
-    NIX_DEBUG = "1";
-    NIX_SHOW_STATS = "1";
-    # Подробный вывод nh
-    NH_VERBOSE = "1";
   };
 
   system.stateVersion = "25.05";

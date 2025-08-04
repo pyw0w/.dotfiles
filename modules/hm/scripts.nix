@@ -94,10 +94,10 @@
   home.file.".local/bin/nix-switch-fast" = {
     text = ''
       #!/bin/bash
-      echo "🚀 Starting fast system switch..."
+      echo "🚀 Starting system switch..."
       echo "📊 Start time: $(date)"
       
-      if nh os switch --fast; then
+      if nh os switch; then
         echo "✅ Switch completed successfully!"
         echo "📊 End time: $(date)"
         echo "💾 System size: $(nix path-info --closure-size /run/current-system | numfmt --to=iec)"

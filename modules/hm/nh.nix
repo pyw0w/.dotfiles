@@ -6,7 +6,6 @@
     # Основные команды nh
     "ns" = "nh os switch";
     "nsw" = "nh os switch --dry";
-    "nsf" = "nh os switch --fast";
     "nsv" = "nh os switch --verbose";
     "nsa" = "nh os switch --ask";
     
@@ -36,12 +35,10 @@
     # Команды для home-manager
     "nh" = "nh home switch";
     "nhw" = "nh home switch --dry";
-    "nhf" = "nh home switch --fast";
     "nhv" = "nh home switch --verbose";
     
     # Быстрые команды с подробным выводом
     "nsw-detailed" = "NIX_DEBUG=1 NIX_SHOW_STATS=1 nh os switch --no-nom";
-    "nsw-fast-detailed" = "NIX_DEBUG=1 NIX_SHOW_STATS=1 nh os switch --fast --no-nom";
   };
 
   # Функции для nh
@@ -51,7 +48,7 @@
       echo "🚀 Начинаю переключение системы..."
       echo "📊 Время начала: $(date)"
       
-      if nh os switch --fast; then
+      if nh os switch; then
         echo "✅ Переключение завершено успешно!"
         echo "📊 Время завершения: $(date)"
         echo "💾 Размер системы: $(nix path-info --closure-size /run/current-system | numfmt --to=iec)"
