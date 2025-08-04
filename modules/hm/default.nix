@@ -5,6 +5,7 @@
     # ./example.nix - add your modules here
     ./russian.nix
     ./scripts.nix
+    ./minecraft.nix
     ../dev
     inputs.yandex-music.homeManagerModules.default
   ];
