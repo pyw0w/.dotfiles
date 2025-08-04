@@ -6,6 +6,7 @@
     ./russian.nix
     ./scripts.nix
     ./minecraft.nix
+    ./nh.nix
     ../dev
     inputs.yandex-music.homeManagerModules.default
   ];

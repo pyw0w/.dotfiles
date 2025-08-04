@@ -52,4 +52,60 @@
     '';
     executable = true;
   };
+
+  # NixOS monitoring scripts
+  home.file.".local/bin/nix-status" = {
+    text = ''
+      #!/bin/bash
+      echo "📊 NixOS System Status"
+      echo "======================"
+      echo "🏗️  System size: $(nix path-info --closure-size /run/current-system | numfmt --to=iec)"
+      echo "📅 Generations:"
+      sudo nix-env --list-generations --profile /nix/var/nix/profiles/system | tail -5
+      echo "💾 Available space: $(df -h /nix | tail -1 | awk '{print $4}')"
+      echo "======================"
+    '';
+    executable = true;
+  };
+
+  home.file.".local/bin/nix-clean" = {
+    text = ''
+      #!/bin/bash
+      KEEP="$1"
+      if [[ -z "$KEEP" ]]; then
+        KEEP=3
+      fi
+      
+      echo "🧹 Cleaning NixOS system..."
+      echo "📊 Keeping $KEEP generations"
+      echo "💾 Size before: $(nix path-info --closure-size /run/current-system | numfmt --to=iec)"
+      
+      if nh clean all --keep "$KEEP"; then
+        echo "✅ Cleanup completed!"
+        echo "💾 Size after: $(nix path-info --closure-size /run/current-system | numfmt --to=iec)"
+      else
+        echo "❌ Cleanup failed!"
+        exit 1
+      fi
+    '';
+    executable = true;
+  };
+
+  home.file.".local/bin/nix-switch-fast" = {
+    text = ''
+      #!/bin/bash
+      echo "🚀 Starting fast system switch..."
+      echo "📊 Start time: $(date)"
+      
+      if nh os switch --fast; then
+        echo "✅ Switch completed successfully!"
+        echo "📊 End time: $(date)"
+        echo "💾 System size: $(nix path-info --closure-size /run/current-system | numfmt --to=iec)"
+      else
+        echo "❌ Switch failed!"
+        exit 1
+      fi
+    '';
+    executable = true;
+  };
 } 
