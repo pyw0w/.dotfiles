@@ -51,8 +51,8 @@ in {
         "ryantm.cachix.org-1:EkFaS4psu2VmLy+JtM1BzSbb6aLVT1M991RF9Yf0Of8="
         "mic92.cachix.org-1:j8v0ATB19XkmUdb3hRYfYM3eVlk10G6d81jCvyp10Gg="
       ];
-      max-jobs = "auto";
-      cores = 0;
+      max-jobs = 8;  # 8 параллельных сборок (оптимально для 6 ядер)
+      cores = 6;     # Используем все 6 ядер
       # Оптимизации для ускорения загрузки
       auto-optimise-store = true;
       http-connections = 50;
@@ -158,29 +158,48 @@ in {
     });
   '';
 
-  # Системные оптимизации для производительности
+  # Системные оптимизации для производительности (64GB RAM, 6 ядер)
   boot.kernel.sysctl = {
-    # Оптимизации сети
-    "net.core.rmem_max" = 134217728;
-    "net.core.wmem_max" = 134217728;
-    "net.ipv4.tcp_rmem" = "4096 87380 134217728";
-    "net.ipv4.tcp_wmem" = "4096 65536 134217728";
-    # Оптимизации файловой системы
-    "vm.swappiness" = 10;
-    "vm.dirty_ratio" = 15;
-    "vm.dirty_background_ratio" = 5;
+    # Оптимизации сети для быстрой загрузки
+    "net.core.rmem_max" = 268435456;  # 256MB
+    "net.core.wmem_max" = 268435456;  # 256MB
+    "net.ipv4.tcp_rmem" = "4096 131072 268435456";
+    "net.ipv4.tcp_wmem" = "4096 131072 268435456";
+    # Оптимизации файловой системы для мощного железа
+    "vm.swappiness" = 1;              # Минимальный swap
+    "vm.dirty_ratio" = 20;            # Больше кэша
+    "vm.dirty_background_ratio" = 10; # Больше фоновой записи
     # Оптимизации для параллельной работы
     "kernel.sched_autogroup_enabled" = 0;
+    # Оптимизации памяти
+    "vm.vfs_cache_pressure" = 50;     # Меньше давления на кэш
+    "vm.dirty_writeback_centisecs" = 500; # Чаще запись
+    # Оптимизации для сборки
+    "fs.file-max" = 2097152;          # Больше открытых файлов
+    "fs.inotify.max_user_watches" = 524288; # Больше watchers
   };
 
-  # Оптимизации для быстрой загрузки
+  # Оптимизации для быстрой загрузки (оптимизировано под 64GB RAM, 6 ядер)
   systemd.services.nix-daemon = {
     environment = {
-      NIX_BUILD_CORES = "0";
+      NIX_BUILD_CORES = "6";  # Используем все 6 ядер
       NIX_REMOTE = "daemon";
       # Переменные для подробного вывода
       NIX_DEBUG = "1";
       NIX_SHOW_STATS = "1";
+      # Оптимизации для мощного железа
+      NIX_BUILD_MAX_JOBS = "8";
+      # Увеличиваем буферы для быстрой сборки
+      NIX_BUFFER_SIZE = "1048576";  # 1MB буфер
+    };
+    serviceConfig = {
+      # Щедрые лимиты памяти для мощного железа
+      MemoryMax = "32G";      # До 32GB для nix-daemon
+      MemoryHigh = "24G";     # Предупреждение при 24GB
+      # Приоритет для быстрой работы
+      Nice = -10;
+      # Увеличиваем лимиты файлов
+      LimitNOFILE = 65536;
     };
   };
 

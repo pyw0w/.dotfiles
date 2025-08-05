@@ -13,8 +13,8 @@
     prime = {
       offload.enable = false;  # Disable for desktop setup
     };
-    # CUDA support
-    nvidiaPersistenced = true;
+    # CUDA support (temporarily disabled to fix startup issues)
+    # nvidiaPersistenced = true;
   };
 
   # X11 configuration (fallback)
