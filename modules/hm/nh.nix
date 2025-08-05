@@ -116,14 +116,46 @@
       fi
     }
 
+    # Функция для управления Java версиями
+    java-manager() {
+      case "$1" in
+        "list"|"ls")
+          echo "📋 Available Java versions:"
+          echo "  🟢 Java 8:  $JAVA_8_HOME"
+          echo "  🟡 Java 17: $JAVA_17_HOME (default)"
+          echo "  🔵 Java 21: $JAVA_21_HOME"
+          echo "  📍 Current: $JAVA_HOME"
+          ;;
+        "switch"|"sw")
+          if [[ -n "$2" ]]; then
+            java-switch "$2"
+          else
+            echo "Usage: java-manager switch [8|17|21]"
+          fi
+          ;;
+        "info"|"i")
+          echo "📊 Java Information:"
+          echo "  Version: $(java -version 2>&1 | head -1)"
+          echo "  Home: $JAVA_HOME"
+          echo "  Path: $(which java)"
+          ;;
+        *)
+          echo "🔧 Java Manager - Usage:"
+          echo "  java-manager list    - Show available versions"
+          echo "  java-manager switch  - Switch Java version"
+          echo "  java-manager info    - Show current Java info"
+          ;;
+      esac
+    }
+
     # Автодополнение для nh команд
     _nh_completion() {
       local cur="$2"
       local prev="$3"
       
       case "$prev" in
-        "ns"|"nsw"|"nsf"|"nsv"|"nsa")
-          COMPREPLY=( $(compgen -W "--dry --fast --verbose --ask --no-nom --update" -- "$cur") )
+        "ns"|"nsw"|"nsv"|"nsa")
+          COMPREPLY=( $(compgen -W "--dry --verbose --ask --no-nom --update" -- "$cur") )
           ;;
         "nc"|"ncw"|"nc3"|"nc5"|"nc7")
           COMPREPLY=( $(compgen -W "--keep --dry --ask --verbose" -- "$cur") )
@@ -134,7 +166,7 @@
       esac
     }
     
-    complete -F _nh_completion ns nsw nsf nsv nsa nc ncw nc3 nc5 nc7 nsearch nsearch-pretty
+    complete -F _nh_completion ns nsw nsv nsa nc ncw nc3 nc5 nc7 nsearch nsearch-pretty
   '';
 
   # Переменные окружения для nh
