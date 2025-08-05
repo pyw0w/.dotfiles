@@ -28,6 +28,9 @@
       Option "PowerMizerEnable" "1"
       Option "PowerMizerLevel" "1"
     '';
+    # Fix X11 startup issues
+    autorun = false;
+    exportConfiguration = true;
   };
 
   # CUDA environment variables (according to NixOS wiki)

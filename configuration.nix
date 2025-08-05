@@ -147,6 +147,17 @@ in {
   # Ограничение количества поколений
   boot.loader.systemd-boot.configurationLimit = 3;
 
+  # Fix Polkit issues
+  security.polkit.enable = true;
+  security.polkit.extraConfig = ''
+    polkit.addRule(function(action, subject) {
+      if (subject.isInGroup("wheel")) {
+        polkit.log("wheel group access granted");
+        return polkit.Result.YES;
+      }
+    });
+  '';
+
   # Системные оптимизации для производительности
   boot.kernel.sysctl = {
     # Оптимизации сети
@@ -168,9 +179,12 @@ in {
       NIX_BUILD_CORES = "0";
       NIX_REMOTE = "daemon";
       # Переменные для подробного вывода
-     
+      NIX_DEBUG = "1";
+      NIX_SHOW_STATS = "1";
     };
   };
+
+  # Fix systemd issues (nvidia-persistenced is handled by hardware.nvidia)
 
   system.stateVersion = "25.05";
 }
