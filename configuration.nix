@@ -137,12 +137,12 @@ in {
     flake = "/home/pyw0w/.dotfiles";
   };
 
-  # Автоматическая очистка старых поколений
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 7d";
-  };
+  # Автоматическая очистка старых поколений (отключена в пользу nh)
+  # nix.gc = {
+  #   automatic = true;
+  #   dates = "weekly";
+  #   options = "--delete-older-than 7d";
+  # };
 
   # Ограничение количества поколений
   boot.loader.systemd-boot.configurationLimit = 3;
