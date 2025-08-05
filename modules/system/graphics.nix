@@ -69,6 +69,5 @@
     python3Packages.torchvision
     python3Packages.torchaudio
     # CUDA utilities
-    nvidia-cuda-toolkit
   ];
 }
