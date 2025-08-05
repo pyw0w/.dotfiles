@@ -15,22 +15,19 @@
     };
     # CUDA support
     nvidiaPersistenced = true;
-    # Enable all NVIDIA features
-    settings = {
-      # Performance settings
-      CoolBits = "28";
-      # CUDA settings
-      UseEvents = "On";
-      # Power management
-      PowerMizerEnable = "1";
-      PowerMizerLevel = "1";
-    };
   };
 
   # X11 configuration (fallback)
   services.xserver = {
     enable = true;
     videoDrivers = [ "nvidia" ];
+    # NVIDIA performance settings
+    screenSection = ''
+      Option "CoolBits" "28"
+      Option "UseEvents" "On"
+      Option "PowerMizerEnable" "1"
+      Option "PowerMizerLevel" "1"
+    '';
   };
 
   # CUDA environment variables
