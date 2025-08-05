@@ -65,15 +65,12 @@
     vulkan-loader
     vulkan-validation-layers
     # CUDA packages (according to NixOS wiki)
-    pkgs.cudaPackages.cudatoolkit
-    pkgs.cudaPackages.cudnn
-    pkgs.cuda-samples
+    cudaPackages.cudatoolkit
+    cudaPackages.cudnn
     # Machine learning with CUDA
     python3Packages.torch
     python3Packages.torchvision
     python3Packages.torchaudio
     # CUDA utilities
-    pkgs.cuda-gdb
-    pkgs.cuda-memcheck
   ];
 }
