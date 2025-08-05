@@ -64,14 +64,11 @@
     # CUDA packages
     cudaPackages.cudatoolkit
     cudaPackages.cudnn
-    cudaPackages.cuda-samples
     # Machine learning with CUDA
     python3Packages.torch
     python3Packages.torchvision
     python3Packages.torchaudio
     # CUDA utilities
     nvidia-cuda-toolkit
-    cudaPackages.cuda-gdb
-    cudaPackages.cuda-memcheck
   ];
 }
