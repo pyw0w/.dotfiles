@@ -108,4 +108,86 @@
     '';
     executable = true;
   };
+
+  # CUDA management scripts
+  home.file.".local/bin/cuda-status" = {
+    text = ''
+      #!/bin/bash
+      echo "🔧 CUDA Status Check"
+      echo "==================="
+      
+      # Check NVIDIA driver
+      echo "📊 NVIDIA Driver:"
+      nvidia-smi 2>/dev/null || echo "❌ NVIDIA driver not working"
+      
+      # Check CUDA installation
+      echo ""
+      echo "⚡ CUDA Installation:"
+      if command -v nvcc &> /dev/null; then
+        echo "✅ CUDA Compiler: $(nvcc --version | head -1)"
+        echo "📍 CUDA Path: $CUDA_HOME"
+      else
+        echo "❌ CUDA compiler not found"
+      fi
+      
+      # Check PyTorch CUDA
+      echo ""
+      echo "🧠 PyTorch CUDA:"
+      python3 -c "import torch; print(f'PyTorch: {torch.__version__}'); print(f'CUDA available: {torch.cuda.is_available()}'); print(f'CUDA version: {torch.version.cuda}'); print(f'GPU count: {torch.cuda.device_count()}')" 2>/dev/null || echo "❌ PyTorch not available"
+      
+      echo "==================="
+    '';
+    executable = true;
+  };
+
+  home.file.".local/bin/cuda-test" = {
+    text = ''
+      #!/bin/bash
+      echo "🧪 CUDA Test Suite"
+      echo "=================="
+      
+      # Test CUDA samples
+      if [[ -d "$CUDA_HOME/samples" ]]; then
+        echo "📁 CUDA Samples found at: $CUDA_HOME/samples"
+        echo "🔍 Available samples:"
+        find "$CUDA_HOME/samples" -name "*.cu" | head -5
+      else
+        echo "❌ CUDA samples not found"
+      fi
+      
+      # Test PyTorch CUDA
+      echo ""
+      echo "🧠 Testing PyTorch CUDA:"
+      python3 -c "
+import torch
+print(f'PyTorch version: {torch.__version__}')
+print(f'CUDA available: {torch.cuda.is_available()}')
+if torch.cuda.is_available():
+    print(f'GPU: {torch.cuda.get_device_name(0)}')
+    print(f'Memory: {torch.cuda.get_device_properties(0).total_memory / 1024**3:.1f} GB')
+    # Test tensor operations
+    x = torch.randn(1000, 1000).cuda()
+    y = torch.randn(1000, 1000).cuda()
+    z = torch.mm(x, y)
+    print('✅ CUDA tensor operations working')
+else:
+    print('❌ CUDA not available in PyTorch')
+" 2>/dev/null || echo "❌ PyTorch test failed"
+      
+      echo "=================="
+    '';
+    executable = true;
+  };
+
+  home.file.".local/bin/cuda-monitor" = {
+    text = ''
+      #!/bin/bash
+      echo "📊 CUDA GPU Monitor"
+      echo "==================="
+      
+      # Monitor GPU usage
+      watch -n 1 'nvidia-smi --query-gpu=index,name,temperature.gpu,utilization.gpu,memory.used,memory.total --format=csv,noheader,nounits'
+    '';
+    executable = true;
+  };
 } 

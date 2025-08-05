@@ -116,6 +116,35 @@
       fi
     }
 
+    # Функция для CUDA управления
+    cuda-manager() {
+      case "$1" in
+        "status"|"s")
+          cuda-status
+          ;;
+        "test"|"t")
+          cuda-test
+          ;;
+        "monitor"|"m")
+          cuda-monitor
+          ;;
+        "info"|"i")
+          echo "🔧 CUDA Information:"
+          echo "  CUDA_HOME: $CUDA_HOME"
+          echo "  CUDA_PATH: $CUDA_PATH"
+          echo "  TORCH_CUDA_ARCH_LIST: $TORCH_CUDA_ARCH_LIST"
+          echo "  GPU Architecture: RTX 3060 (6.1)"
+          ;;
+        *)
+          echo "⚡ CUDA Manager - Usage:"
+          echo "  cuda-manager status   - Check CUDA status"
+          echo "  cuda-manager test     - Run CUDA tests"
+          echo "  cuda-manager monitor  - Monitor GPU usage"
+          echo "  cuda-manager info     - Show CUDA info"
+          ;;
+      esac
+    }
+
     # Функция для управления Java версиями
     java-manager() {
       case "$1" in
