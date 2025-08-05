@@ -51,15 +51,19 @@ in {
         "ryantm.cachix.org-1:EkFaS4psu2VmLy+JtM1BzSbb6aLVT1M991RF9Yf0Of8="
         "mic92.cachix.org-1:j8v0ATB19XkmUdb3hRYfYM3eVlk10G6d81jCvyp10Gg="
       ];
-      max-jobs = 8;  # 8 параллельных сборок (оптимально для 6 ядер)
-      cores = 6;     # Используем все 6 ядер
-      # Оптимизации для ускорения загрузки
+      max-jobs = 12;  # 12 параллельных сборок (оптимально для 6 ядер, 12 потоков)
+      cores = 12;     # Используем все 12 потоков
+      # Агрессивные оптимизации для ускорения загрузки
       auto-optimise-store = true;
-      http-connections = 50;
+      http-connections = 100;  # Увеличиваем соединения
       builders-use-substitutes = true;
-      connect-timeout = 60;
-      max-silent-time = 3600;
-      build-timeout = 3600;
+      connect-timeout = 30;    # Уменьшаем таймауты
+      max-silent-time = 1800;  # Уменьшаем время ожидания
+      build-timeout = 1800;    # Уменьшаем время сборки
+      # Дополнительные оптимизации для скорости
+      keep-going = true;       # Продолжать при ошибках
+      fallback = true;         # Fallback на сборку
+      show-trace = false;      # Отключаем трассировку
       # Дополнительные оптимизации
       experimental-features = [ "nix-command" "flakes" "ca-derivations" "recursive-nix" ];
       # Увеличиваем буферы для быстрой загрузки
@@ -158,46 +162,64 @@ in {
     });
   '';
 
-  # Системные оптимизации для производительности (64GB RAM, 6 ядер)
+  # Агрессивные системные оптимизации для производительности (64GB RAM, 6 ядер, 12 потоков)
   boot.kernel.sysctl = {
-    # Оптимизации сети для быстрой загрузки
-    "net.core.rmem_max" = 268435456;  # 256MB
-    "net.core.wmem_max" = 268435456;  # 256MB
-    "net.ipv4.tcp_rmem" = "4096 131072 268435456";
-    "net.ipv4.tcp_wmem" = "4096 131072 268435456";
-    # Оптимизации файловой системы для мощного железа
-    "vm.swappiness" = 1;              # Минимальный swap
-    "vm.dirty_ratio" = 20;            # Больше кэша
-    "vm.dirty_background_ratio" = 10; # Больше фоновой записи
-    # Оптимизации для параллельной работы
+    # Агрессивные оптимизации сети для быстрой загрузки
+    "net.core.rmem_max" = 536870912;  # 512MB
+    "net.core.wmem_max" = 536870912;  # 512MB
+    "net.ipv4.tcp_rmem" = "8192 262144 536870912";
+    "net.ipv4.tcp_wmem" = "8192 262144 536870912";
+    "net.core.netdev_max_backlog" = 5000;
+    "net.ipv4.tcp_congestion_control" = "bbr";
+    "net.ipv4.tcp_fastopen" = 3;
+    # Агрессивные оптимизации файловой системы для мощного железа
+    "vm.swappiness" = 0;              # Отключаем swap
+    "vm.dirty_ratio" = 30;            # Ещё больше кэша
+    "vm.dirty_background_ratio" = 15; # Ещё больше фоновой записи
+    # Агрессивные оптимизации для параллельной работы
     "kernel.sched_autogroup_enabled" = 0;
-    # Оптимизации памяти
-    "vm.vfs_cache_pressure" = 50;     # Меньше давления на кэш
-    "vm.dirty_writeback_centisecs" = 500; # Чаще запись
-    # Оптимизации для сборки
-    "fs.file-max" = 2097152;          # Больше открытых файлов
-    "fs.inotify.max_user_watches" = 524288; # Больше watchers
+    "kernel.sched_min_granularity_ns" = 1000000;
+    "kernel.sched_wakeup_granularity_ns" = 1000000;
+    # Агрессивные оптимизации памяти
+    "vm.vfs_cache_pressure" = 25;     # Ещё меньше давления на кэш
+    "vm.dirty_writeback_centisecs" = 250; # Ещё чаще запись
+    "vm.overcommit_memory" = 1;       # Разрешаем overcommit
+    "vm.overcommit_ratio" = 100;      # 100% overcommit
+    # Агрессивные оптимизации для сборки
+    "fs.file-max" = 4194304;          # Ещё больше открытых файлов
+    "fs.inotify.max_user_watches" = 1048576; # Ещё больше watchers
+    "fs.inotify.max_user_instances" = 524288;
+    "fs.inotify.max_queued_events" = 524288;
+    # Оптимизации для CPU
+    "kernel.numa_balancing" = 0;      # Отключаем NUMA balancing
+    "kernel.sched_rt_runtime_us" = -1; # Неограниченное RT время
   };
 
-  # Оптимизации для быстрой загрузки (оптимизировано под 64GB RAM, 6 ядер)
+  # Агрессивные оптимизации для быстрой загрузки (64GB RAM, 6 ядер, 12 потоков)
   systemd.services.nix-daemon = {
     environment = {
-      NIX_BUILD_CORES = "6";  # Используем все 6 ядер
+      NIX_BUILD_CORES = "12";  # Используем все 12 потоков
       NIX_REMOTE = "daemon";
-      # Переменные для подробного вывода
-      NIX_DEBUG = "1";
-      NIX_SHOW_STATS = "1";
-      # Оптимизации для мощного железа
-      NIX_BUILD_MAX_JOBS = "8";
+      # Отключаем подробный вывод для скорости
+      NIX_DEBUG = "0";
+      NIX_SHOW_STATS = "0";
+      # Агрессивные оптимизации для мощного железа
+      NIX_BUILD_MAX_JOBS = "12";
       # Увеличиваем буферы для быстрой сборки
-      NIX_BUFFER_SIZE = "1048576";  # 1MB буфер
+      NIX_BUFFER_SIZE = "2097152";  # 2MB буфер
+      # Дополнительные оптимизации
+      NIX_DAEMON_SOCKET_PATH = "/nix/var/nix/daemon-socket/socket";
+      NIX_DAEMON_LOG_FILE = "/var/log/nix-daemon.log";
     };
     serviceConfig = {
       # Щедрые лимиты памяти для мощного железа
-      MemoryMax = "32G";      # До 32GB для nix-daemon
-      MemoryHigh = "24G";     # Предупреждение при 24GB
-      # Приоритет для быстрой работы
-      Nice = -10;
+      MemoryMax = "40G";      # До 40GB для nix-daemon
+      MemoryHigh = "32G";     # Предупреждение при 32GB
+      # Максимальный приоритет для быстрой работы
+      Nice = -20;
+      # Дополнительные оптимизации
+      Restart = "always";
+      RestartSec = 1;
       # Увеличиваем лимиты файлов (используем значение по умолчанию NixOS)
       # LimitNOFILE уже установлен в 1048576 системой
     };
