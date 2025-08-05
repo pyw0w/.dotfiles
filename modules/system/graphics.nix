@@ -68,9 +68,9 @@
     cudaPackages.cudatoolkit
     cudaPackages.cudnn
     # Machine learning with CUDA
-    python3Packages.torch
-    python3Packages.torchvision
-    python3Packages.torchaudio
+    #python3Packages.torch
+    #python3Packages.torchvision
+    #python3Packages.torchaudio
     # CUDA utilities
   ];
 }
