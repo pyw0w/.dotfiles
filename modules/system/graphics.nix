@@ -4,7 +4,7 @@
   hardware.graphics.enable = true;
   hardware.graphics.enable32Bit = true;
   
-  # NVIDIA configuration for Wayland and CUDA compatibility
+  # NVIDIA configuration for Wayland and CUDA compatibility (according to NixOS wiki)
   hardware.nvidia = {
     package = config.boot.kernelPackages.nvidiaPackages.stable;
     open = true;  # Required for NVIDIA driver versions >= 560
@@ -30,12 +30,11 @@
     '';
   };
 
-  # CUDA environment variables
+  # CUDA environment variables (according to NixOS wiki)
   environment.variables = {
     # CUDA paths
     CUDA_PATH = "${pkgs.cudaPackages.cudatoolkit}";
     CUDA_HOME = "${pkgs.cudaPackages.cudatoolkit}";
-    CUDA_ROOT = "${pkgs.cudaPackages.cudatoolkit}";
     
     # CUDA libraries
     LD_LIBRARY_PATH = "${pkgs.cudaPackages.cudatoolkit}/lib64:${pkgs.cudaPackages.cudnn}/lib:$LD_LIBRARY_PATH";
@@ -51,6 +50,10 @@
     # Performance optimizations
     CUDA_LAUNCH_BLOCKING = "0";
     CUDA_CACHE_DISABLE = "0";
+    
+    # Additional CUDA settings
+    CUDA_CACHE_PATH = "/tmp/cuda-cache";
+    CUDA_PROFILE = "0";
   };
 
   environment.systemPackages = with pkgs; [
@@ -61,13 +64,16 @@
     vulkan-tools
     vulkan-loader
     vulkan-validation-layers
-    # CUDA packages
-    cudaPackages.cudatoolkit
-    cudaPackages.cudnn
+    # CUDA packages (according to NixOS wiki)
+    pkgs.cudaPackages.cudatoolkit
+    pkgs.cudaPackages.cudnn
+    pkgs.cuda-samples
     # Machine learning with CUDA
     python3Packages.torch
     python3Packages.torchvision
     python3Packages.torchaudio
     # CUDA utilities
+    pkgs.cuda-gdb
+    pkgs.cuda-memcheck
   ];
 }
