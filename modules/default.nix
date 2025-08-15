@@ -29,8 +29,6 @@
     ./playerctl.nix
     ./sops.nix
     ./steam.nix
-    ./virt-manager.nix
-    ./virtualbox.nix
     ./cursor.nix
   ];
 }
