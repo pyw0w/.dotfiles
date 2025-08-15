@@ -271,8 +271,6 @@
     };
   };
 
-  virtualisation.docker.enable = true;
-
   environment = {
     systemPackages = with pkgs; [
       # Essential
