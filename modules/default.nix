@@ -16,7 +16,6 @@
     ./swaylock-effects
     ./swaync
     ./zen-browser
-    ./blocky.nix
     ./bluetooth.nix
     ./devtools.nix
     ./discord.nix
