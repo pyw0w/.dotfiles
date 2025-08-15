@@ -17,9 +17,7 @@
     ./sddm-sugar-candy
     ./starship
     ./swaylock-effects
-    ./vim
     ./swaync
-    ./vscodium
     ./zen-browser
     ./ai-chatbot.nix
     ./blocky.nix

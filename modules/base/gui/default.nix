@@ -88,7 +88,6 @@ args@{ config, lib, pkgs, variables, ... }:
     ###########################################
 
     local = {
-      vscodium.enable = true;
       alacritty.enable = true;
       hyprland.enable = true;
       awesome.enable = true;

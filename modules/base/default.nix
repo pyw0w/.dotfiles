@@ -85,6 +85,7 @@ args@{ lib, pkgs, variables, device, ... }:
   environment.systemPackages = with pkgs; [
     wget
     bash
+    nano # text editor (replaces vim)
     jq # process json
     lsd # better ls
     bat # better cat
@@ -102,7 +103,6 @@ args@{ lib, pkgs, variables, device, ... }:
   ];
 
   local = {
-    vim.enable = true;
     fish.enable = true;
     sops.enable = true;
     starship.enable = true;
@@ -158,7 +158,7 @@ args@{ lib, pkgs, variables, device, ... }:
 
   # some environment variables
   environment.variables = {
-    EDITOR = "vim";
+    EDITOR = "nano";
     # colorize man pages with bat
     MANPAGER = "sh -c 'col -bx | bat --language man --plain'";
     MANROFFOPT = "-c";
