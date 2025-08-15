@@ -10,8 +10,6 @@
     ./gitnuro
     ./hyprland
     ./jetbrains
-    ./lamp-server
-    ./minecraft-server
     ./plymouth
     ./rofi
     ./sddm-sugar-candy
@@ -23,7 +21,6 @@
     ./bluetooth.nix
     ./devtools.nix
     ./discord.nix
-    ./distributed-builds.nix
     ./fastfetch.nix
     ./nautilus.nix
     ./nvidia.nix

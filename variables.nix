@@ -17,14 +17,5 @@
   nixosConfigs = { mkNixosConfigs, inputs }: mkNixosConfigs [
     { internalName = "desktop"; }
     { internalName = "laptop";  }
-    { 
-      internalName = "raspberry-pi";
-          hostName =     "nixos-pi";
-      system = "aarch64-linux";
-    }
-    {
-      internalName = "wsl";
-          hostName = "wsl";
-    }
   ];
 }

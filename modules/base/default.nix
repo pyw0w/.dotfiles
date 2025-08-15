@@ -108,7 +108,6 @@ args@{ lib, pkgs, variables, device, ... }:
     starship.enable = true;
     fastfetch.enable = true;
     devtools.python.enable = true;
-    distributed-builds.enable = true;
   };
 
   # load dev environment from directory

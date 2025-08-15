@@ -11,11 +11,9 @@
     nixos-hardware.url = "github:nixos/nixos-hardware";
     # nixpkgs to avoid expensive cache misses of couchdb and dependencies on aarch64
     couchdb-aarch64-nixpkgs.url = "github:nixos/nixpkgs?rev=eb0e0f21f15c559d2ac7633dc81d079d1caf5f5f";
-    # control govee rgb lamp
-    lamp-server.url = "github:julius-boettger/lamp-server-rust";
+    # lamp-server removed - no govee rgb lamp needed
     # terralux-backend removed - no reptile terrarium needed
-    # host minecraft server
-    nix-minecraft.url = "github:Infinidoge/nix-minecraft";
+    # minecraft-server removed - no minecraft server needed
     # hyprland (to manage version independently of other packages)
     hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1&ref=refs/tags/v0.50.1";
     # hyprland plugin for better multi-monitor workspaces, matching hyprland version: ^v^v^v^
@@ -36,12 +34,8 @@
     # declarative database for command-not-found
     programs-sqlite = { url = "github:wamserma/flake-programs-sqlite";
       inputs.nixpkgs.follows = "nixpkgs-unstable"; };
-    # wsl utils
-    nixos-wsl = { url = "github:nix-community/NixOS-WSL";
-      inputs.nixpkgs.follows = "nixpkgs"; };
-    # to connect vscode on windows with nixos wsl
-    vscode-server = { url = "github:nix-community/nixos-vscode-server";
-      inputs.nixpkgs.follows = "nixpkgs"; };
+    # wsl utils removed - no WSL needed
+    # vscode-server removed - no WSL needed
     # declarative discord config
     nixcord = { url = "github:kaylorben/nixcord";
       inputs.nixpkgs.follows = "nixpkgs"; };
