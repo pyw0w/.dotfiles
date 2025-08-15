@@ -25,9 +25,7 @@
     # secret management with sops
     sops-nix = { url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs"; };
-    # host own website
-    website = { url = "github:julius-boettger/website";
-      inputs.nixpkgs.follows = "nixpkgs"; };
+    # website removed - no longer needed
     # declarative disk management
     disko = { url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs"; };

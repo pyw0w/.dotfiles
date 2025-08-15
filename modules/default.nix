@@ -9,7 +9,6 @@
     ./fish
     ./gitnuro
     ./hyprland
-    ./jetbrains
     ./plymouth
     ./rofi
     ./sddm-sugar-candy
