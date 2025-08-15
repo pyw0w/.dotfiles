@@ -19,7 +19,6 @@
     ./swaylock-effects
     ./swaync
     ./zen-browser
-    ./ai-chatbot.nix
     ./blocky.nix
     ./bluetooth.nix
     ./devtools.nix
@@ -28,7 +27,6 @@
     ./fastfetch.nix
     ./nautilus.nix
     ./nvidia.nix
-    ./obsidian-livesync.nix
     ./onedrive.nix
     ./piper.nix
     ./playerctl.nix
@@ -37,8 +35,6 @@
     ./terralux-backend.nix
     ./virt-manager.nix
     ./virtualbox.nix
-    ./website.nix
-    ./wsl-vpnkit.nix
     ./cursor.nix
   ];
 }

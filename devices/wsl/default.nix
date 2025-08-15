@@ -13,8 +13,7 @@ args@{ lib, pkgs, inputs, variables, ... }:
   # usually enabled in modules/base/default.nix, doesnt work here
   boot.loader.systemd-boot.enable = lib.mkForce false;
 
-  # for issues with company network/vpn
-  local.wsl-vpnkit.enable = true;
+  # wsl-vpnkit removed - no longer needed
 
   # git gui (yes, that works with wsl!)
   local.gitnuro.enable = true;

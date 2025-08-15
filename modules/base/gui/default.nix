@@ -52,7 +52,6 @@ args@{ config, lib, pkgs, variables, ... }:
       xarchiver # archive manager
       baobab # disk usage analyzer
       gnome-disk-utility
-      obsidian # PROPRIETARY notes
       spotify # PROPRIETARY
       # gtk theme
       (orchis-theme.override { border-radius = 10; })
