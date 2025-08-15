@@ -180,5 +180,9 @@
       desktop = nixosConfigs.desktop.config.system.build.toplevel;
       laptop = nixosConfigs.laptop.config.system.build.toplevel;
     };
+    
+    # Direct attributes for nh compatibility
+    desktop = nixosConfigs.desktop;
+    laptop = nixosConfigs.laptop;
   };
 }
