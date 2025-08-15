@@ -8,9 +8,5 @@ lib.mkModule "jetbrains" config {
     #rider
   ];
 
-  # symlink ideavim config to ~
-  home-manager.users.${variables.username} = { config, ... }: {
-    home.file.".ideavimrc".source =
-      config.lib.file.mkOutOfStoreSymlink "/etc/dotfiles/modules/jetbrains/.ideavimrc";
-  };
+  # IdeaVim configuration removed - using default editor behavior
 }
