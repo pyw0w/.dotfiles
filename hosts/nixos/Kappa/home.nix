@@ -8,6 +8,7 @@
   catppuccin = {
     enable = true;
     flavor = "mocha";
+    accent = "mauve";
 
     sway.enable = true;
     mpv.enable = true;
@@ -20,6 +21,14 @@
 
   gtk = {
     enable = true;
+    theme = {
+      package = pkgs.catppuccin-gtk.override {
+        accents = [ "mauve" ];
+        size = "compact";
+        variant = "mocha";
+      };
+      name = "catppuccin-mocha-mauve-compact";
+    };
   };
 
   qt = {
