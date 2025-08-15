@@ -169,18 +169,6 @@
   {
     nixosConfigurations = nixosConfigs;
     
-    # Standard attributes for nh compatibility
-    packages.x86_64-linux = {
-      desktop = nixosConfigs.desktop.config.system.build.toplevel;
-      laptop = nixosConfigs.laptop.config.system.build.toplevel;
-    };
-    
-    # Legacy packages for compatibility
-    legacyPackages.x86_64-linux = {
-      desktop = nixosConfigs.desktop.config.system.build.toplevel;
-      laptop = nixosConfigs.laptop.config.system.build.toplevel;
-    };
-    
     # Direct attributes for nh compatibility
     desktop = nixosConfigs.desktop;
     laptop = nixosConfigs.laptop;
