@@ -103,6 +103,7 @@ args@{ config, lib, pkgs, variables, ... }:
       nautilus.enable = true;
       bluetooth.enable = true;
       discord.enable = true;
+      cursor.enable = true;
     };
 
     services.displayManager.sddm.enable = true;

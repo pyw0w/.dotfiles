@@ -5,11 +5,11 @@
   # use --impure for flake-rebuild by default
   allowImpureByDefault = false;
   # username and displayname of only user
-  username = "julius";
-  displayname = "Julius";
+  username = "pyw0w";
+  displayname = "PyW0W";
   # global git config
-  git.name = "julius-boettger";
-  git.email = "julius.btg@proton.me";
+  git.name = "pyw0w";
+  git.email = "myxi2002@gmail.com";
   
   ### nixos configurations for different devices
   # documentation for possible attributes and their meanings

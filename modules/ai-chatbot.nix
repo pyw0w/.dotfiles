@@ -7,7 +7,7 @@ in
 lib.mkModule "ai-chatbot" config {
 
   services.ollama = {
-    enable = true;
+    enable = false;
     port = backendPort;
     package = pkgs.unstable.ollama;
     loadModels = [

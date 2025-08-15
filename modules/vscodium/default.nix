@@ -21,11 +21,11 @@ lib.mkModule "vscodium" config {
         bmalehorn.vscode-fish
 
         # rust
-        rust-lang.rust-analyzer
-        tamasfe.even-better-toml
-        nixpkgs-exts.vadimcn.vscode-lldb # debugger
-        nolanderc.glasgow # wgsl language support, but without syntax highlighting
-        antaalt.shader-validator # wgsl syntax highlighting
+        #rust-lang.rust-analyzer
+        #tamasfe.even-better-toml
+        #nixpkgs-exts.vadimcn.vscode-lldb # debugger
+        #nolanderc.glasgow # wgsl language support, but without syntax highlighting
+        #antaalt.shader-validator # wgsl syntax highlighting
 
         # c/c++
         #ms-vscode.cpptools
@@ -38,8 +38,8 @@ lib.mkModule "vscodium" config {
 
         ### other stuff
         mkhl.direnv # load dev environment from directory
-        vscodevim.vim # vim :)
-        eamodio.gitlens # advanced git integration
+        #vscodevim.vim # vim :)
+        #eamodio.gitlens # advanced git integration
         esbenp.prettier-vscode # code formatter
         naumovs.color-highlight # highlight color codes with their color
         pkief.material-icon-theme # file icon theme

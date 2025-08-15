@@ -1,4 +1,4 @@
-args@{ config, pkgs, variables, ... }:
+args@{ config, pkgs, variables, lib, ... }:
 {
   imports = [ ../../modules/studies ];
 
@@ -20,11 +20,17 @@ args@{ config, pkgs, variables, ... }:
 
   environment.systemPackages = with pkgs; [
     alsa-scarlett-gui # control center for focusrite usb audio interface
-    liquidctl # liquid cooler control
+    # liquidctl # liquid cooler control (removed - no hardware)
     # to mount encrypted data partition
     zenity # password prompt
     cryptsetup # unlock luks
     dunst # send notifications
+    
+    # Russian language support
+    hunspell
+    hunspellDicts.ru-ru
+    aspell
+    aspellDicts.ru
   ];
 
   # remove background noise from mic
@@ -37,22 +43,48 @@ args@{ config, pkgs, variables, ... }:
 
   # monitor config with xrandr command
   services.xserver.displayManager.setupCommands = "${pkgs.xorg.xrandr}/bin/xrandr --output HDMI-0 --mode 1920x1080 --pos 0x100 --rate 60 --output DP-0 --mode 2560x1440 --pos 1920x0 --rate 144 --primary --preferred";
+  
   # mouse sens config
   services.libinput.mouse.accelSpeed = "-0.7";
 
-  systemd.services.liquidctl = {
-    enable = true;
-    description = "set liquid cooler pump speed curve";
-    serviceConfig = {
-      User = "root";
-      Type = "oneshot";
-      ExecStart = [
-        "${pkgs.liquidctl}/bin/liquidctl initialize all"
-        "${pkgs.liquidctl}/bin/liquidctl --match kraken set pump speed 30 55 40 100"
-      ];
-    };
-    wantedBy = [ "default.target" ];
-  };
+  # Russian language support (basic configuration)
+  # Uncomment the following for full input method support:
+  # i18n.inputMethod = {
+  #   type = "fcitx5";
+  #   enable = true;
+  #   fcitx5.addons = with pkgs; [
+  #     fcitx5-gtk
+  #     fcitx5-configtool
+  #     pkgs.libsForQt5.fcitx5-qt
+  #     fcitx5-mozc
+  #     fcitx5-hangul
+  #     fcitx5-chinese-addons
+  #   ];
+  # };
+
+  # Keyboard layouts
+  services.xserver.xkb.layout = lib.mkForce "us,ru";
+  services.xserver.xkb.variant = lib.mkForce ",";
+  services.xserver.xkb.options = lib.mkForce "grp:alt_shift_toggle,grp_led:scroll";
+
+  # Console keyboard layout
+  console.keyMap = "us";
+
+  # liquidctl service removed - no liquid cooler currently connected
+  # Uncomment and modify the following if you add a liquid cooler:
+  # systemd.services.liquidctl = {
+  #   enable = true;
+  #   description = "set liquid cooler pump speed curve";
+  #   serviceConfig = {
+  #     User = "root";
+  #     Type = "oneshot";
+  #     ExecStart = [
+  #       "${pkgs.liquidctl}/bin/liquidctl initialize all"
+  #       "${pkgs.liquidctl}/bin/liquidctl --match kraken set pump speed 30 55 40 100"
+  #     ];
+  #   };
+  #   wantedBy = [ "default.target" ];
+  # };
   
   # openrgb
   services.hardware.openrgb = {

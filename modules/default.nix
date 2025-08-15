@@ -41,5 +41,6 @@
     ./virtualbox.nix
     ./website.nix
     ./wsl-vpnkit.nix
+    ./cursor.nix
   ];
 }

@@ -12,7 +12,7 @@ args@{ lib, pkgs, variables, device, ... }:
   #########################################################
 
   # self-explaining one-liners
-  time.timeZone = "Europe/Berlin";
+  time.timeZone = "Asia/Yekaterinburg";
   nixpkgs.config.allowUnfree = true;
   system.stateVersion = variables.version;
   nix.settings.experimental-features = [ "nix-command" "flakes" "pipe-operators" ];
@@ -29,7 +29,7 @@ args@{ lib, pkgs, variables, device, ... }:
 
   console = {
     earlySetup = true;
-    keyMap = "de";
+    keyMap = "us";
     colors = [
       "000000" "FC618D" "7BD88F" "FD9353" "5AA0E6" "948AE3" "5AD4E6" "F7F1FF"
       "99979B" "FB376F" "4ECA69" "FD721C" "2180DE" "7C6FDC" "37CBE1" "FFFFFF"
@@ -47,14 +47,18 @@ args@{ lib, pkgs, variables, device, ... }:
   };
 
   i18n.defaultLocale  = "en_US.UTF-8";
+  i18n.supportedLocales = [
+    "en_US.UTF-8/UTF-8"
+    "ru_RU.UTF-8/UTF-8"
+  ];
   i18n.extraLocaleSettings = {
-    LC_IDENTIFICATION = "de_DE.UTF-8";
-    LC_MEASUREMENT    = "de_DE.UTF-8";
-    LC_TELEPHONE      = "de_DE.UTF-8";
-    LC_MONETARY       = "de_DE.UTF-8";
-    LC_ADDRESS        = "de_DE.UTF-8";
-    LC_PAPER          = "de_DE.UTF-8";
-    LC_NAME           = "de_DE.UTF-8";
+    LC_IDENTIFICATION = "en_US.UTF-8";
+    LC_MEASUREMENT    = "en_US.UTF-8";
+    LC_TELEPHONE      = "en_US.UTF-8";
+    LC_MONETARY       = "en_US.UTF-8";
+    LC_ADDRESS        = "en_US.UTF-8";
+    LC_PAPER          = "en_US.UTF-8";
+    LC_NAME           = "en_US.UTF-8";
   };
 
   # database for command-not-found in a declarative way without channels

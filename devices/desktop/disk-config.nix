@@ -43,27 +43,5 @@
         };
       };
     };
-    # encrypted data disk
-    data = {
-      type = "disk";
-      device = "/dev/nvme0n1"; # older ssd
-      content = {
-        type = "gpt";
-        partitions.luks = {
-          size = "100%";
-          content = {
-            type = "luks";
-            name = "encrypted";
-            askPassword = true; # set password when running disko
-            initrdUnlock = false; # don't prompt passphrase on boot
-            settings.allowDiscards = true; # recommended for ssd
-            content = {
-              type = "btrfs";
-              extraArgs = [ "-f" ];
-            };
-          };
-        };
-      };
-    };
   };
 }

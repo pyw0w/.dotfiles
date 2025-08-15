@@ -111,9 +111,8 @@
   "terminal.integrated.fontSize": 18,
   "editor.fontFamily": "'JetBrainsMonoNL Nerd Font', monospace",
 
-  "update.mode": "none", // don't try to update, NixOS will do it
-  "shader-validator.validate": false, // only used for syntax highlighting
+  "update.mode": "none",
   "gitlens.currentLine.enabled": false,
   "terminal.integrated.cursorStyle": "underline",
-  "glasgow.path": "/home/julius/.config/VSCodium/User/globalStorage/nolanderc.glasgow/glasgow_install/bin/glasgow",
+  "glasgow.path": "/home/pyw0w/.config/VSCodium/User/globalStorage/nolanderc.glasgow/glasgow_install/bin/glasgow",
 }
