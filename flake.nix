@@ -163,7 +163,22 @@
         )
       );
   in
+  let
+    nixosConfigs = variables.nixosConfigs { inherit mkNixosConfigs inputs; };
+  in
   {
-    nixosConfigurations = variables.nixosConfigs { inherit mkNixosConfigs inputs; };
+    nixosConfigurations = nixosConfigs;
+    
+    # Standard attributes for nh compatibility
+    packages.x86_64-linux = {
+      desktop = nixosConfigs.desktop.config.system.build.toplevel;
+      laptop = nixosConfigs.laptop.config.system.build.toplevel;
+    };
+    
+    # Legacy packages for compatibility
+    legacyPackages.x86_64-linux = {
+      desktop = nixosConfigs.desktop.config.system.build.toplevel;
+      laptop = nixosConfigs.laptop.config.system.build.toplevel;
+    };
   };
 }
