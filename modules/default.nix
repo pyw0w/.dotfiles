@@ -32,7 +32,6 @@
     ./playerctl.nix
     ./sops.nix
     ./steam.nix
-    ./terralux-backend.nix
     ./virt-manager.nix
     ./virtualbox.nix
     ./cursor.nix

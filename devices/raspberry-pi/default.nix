@@ -19,13 +19,6 @@ args@{ pkgs, ... }:
 
   local = {
     # host some stuff
-    #website.enable = true;
-    #lamp-server.enable = true;
-    #minecraft-server.enable = true;
-    terralux-backend.enable = true;
-    #obsidian-livesync.enable = true;
-    #blocky.enable = true;
-    #ai-chatbot.enable = true;
   };
 
   environment.systemPackages = with pkgs; [
