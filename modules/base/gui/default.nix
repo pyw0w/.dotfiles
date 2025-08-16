@@ -46,7 +46,7 @@ args@{ config, lib, pkgs, variables, ... }:
       vlc # video player
       qview # image viewer
       audacious # audio player
-      snapshot # camera
+      #snapshot # camera
       signal-desktop # messenger
       networkmanagerapplet # tray icon for networking connection
       xarchiver # archive manager

@@ -13,9 +13,9 @@ args@{ config, lib, pkgs, ... }:
     environment.systemPackages = with pkgs; [
       ### gui
       onlyoffice-bin_latest # office suite
-      gimp-with-plugins # image editor
-      darktable # photo editor and raw developer
-      inkscape-with-extensions # vector graphic editor
+      #gimp-with-plugins # image editor
+      #darktable # photo editor and raw developer
+      #inkscape-with-extensions # vector graphic editor
       veracrypt # disk encryption
       freefilesync # file backup
       # jetbrains-gitclient removed - no longer needed
@@ -30,7 +30,7 @@ args@{ config, lib, pkgs, ... }:
 
       ### cli
       dunst # for better notify-send with dunstify
-      gphoto2fs # mount camera
+      #gphoto2fs # mount camera
     ];
   };
 }
