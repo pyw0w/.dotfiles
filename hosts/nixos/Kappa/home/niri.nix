@@ -84,6 +84,10 @@
         mod-key = "Alt";
         mouse.accel-profile = "flat";
         workspace-auto-back-and-forth = true;
+        keyboard.xkb = {
+          layout = "us,ro(std)";
+          options = "grp:win_space_toggle";
+        };
       };
 
       binds = with config.lib.niri.actions; {
