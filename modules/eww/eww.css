@@ -27,3 +27,151 @@ window {
 .outer-circle {
     background: rgba(255, 255, 255, 0.2);
 }
+
+.system-info-panel {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 12px;
+    margin-top: 15px;
+}
+
+/* ========================================
+   RIGHT PANEL STYLES - COMPLETELY SEPARATE
+   ======================================== */
+
+/* Main right panel container */
+.right-panel {
+    background: linear-gradient(180deg, 
+        rgba(20, 20, 25, 0.95) 0%,
+        rgba(30, 30, 35, 0.95) 50%,
+        rgba(20, 20, 25, 0.95) 100%);
+    border-left: 3px solid rgba(100, 150, 255, 0.6);
+    box-shadow: -8px 0 25px rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(15px);
+    border-radius: 0 0 0 15px;
+}
+
+/* System info container within right panel */
+.right-panel .system-info {
+    background: rgba(15, 15, 20, 0.8);
+    border: 1px solid rgba(100, 150, 255, 0.3);
+    border-radius: 12px;
+    padding: 15px 8px;
+    margin: 10px 5px;
+    box-shadow: inset 0 0 10px rgba(100, 150, 255, 0.1);
+}
+
+/* Individual metric boxes */
+.right-panel .metric-box {
+    background: rgba(25, 25, 35, 0.9);
+    border: 1px solid rgba(100, 150, 255, 0.2);
+    border-radius: 8px;
+    padding: 8px 6px;
+    margin: 8px 0;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.right-panel .metric-box:hover {
+    background: rgba(35, 35, 45, 0.95);
+    border-color: rgba(100, 150, 255, 0.5);
+    transform: translateX(-2px);
+    box-shadow: 0 0 15px rgba(100, 150, 255, 0.3);
+}
+
+/* Metric icons */
+.right-panel .metric-icon {
+    font-size: 16px;
+    margin-bottom: 4px;
+    color: rgba(100, 150, 255, 0.9);
+}
+
+/* Metric values */
+.right-panel .metric-value {
+    font-size: 12px;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.95);
+    margin-bottom: 2px;
+}
+
+/* Metric labels */
+.right-panel .metric-label {
+    font-size: 10px;
+    color: rgba(200, 200, 200, 0.7);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Time and date in right panel */
+.right-panel .time-right {
+    font-size: 14px;
+    font-weight: bold;
+    color: rgba(100, 150, 255, 0.9);
+    text-align: center;
+    margin: 8px 0;
+    padding: 8px;
+    background: rgba(20, 25, 35, 0.8);
+    border-radius: 8px;
+    border: 1px solid rgba(100, 150, 255, 0.3);
+}
+
+.right-panel .date-right {
+    font-size: 11px;
+    color: rgba(180, 180, 180, 0.8);
+    text-align: center;
+    margin: 4px 0;
+    padding: 6px;
+    background: rgba(15, 20, 25, 0.6);
+    border-radius: 6px;
+}
+
+/* Progress bars for system metrics */
+.right-panel .progress-bar {
+    background: rgba(20, 20, 25, 0.8);
+    border-radius: 4px;
+    height: 6px;
+    margin: 4px 0;
+    overflow: hidden;
+}
+
+.right-panel .progress-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.5s ease;
+}
+
+.right-panel .progress-fill.cpu {
+    background: linear-gradient(90deg, #4ade80, #22c55e);
+}
+
+.right-panel .progress-fill.ram {
+    background: linear-gradient(90deg, #fbbf24, #f59e0b);
+}
+
+.right-panel .progress-fill.disk {
+    background: linear-gradient(90deg, #f87171, #ef4444);
+}
+
+.right-panel .progress-fill.temp {
+    background: linear-gradient(90deg, #fb923c, #ea580c);
+}
+
+/* Start button styles removed - not needed anymore */
+
+.system-info {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 8px 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.time-bottom {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.date-bottom {
+    font-size: 12px;
+    color: rgba(247, 241, 255, 0.7);
+}
