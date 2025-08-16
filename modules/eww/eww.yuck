@@ -78,16 +78,16 @@
 ; Right panel like Windows taskbar
 (defwindow right-panel
   :stacking "overlay"
-  :exclusive true
+  :exclusive false
   :focusable false
   :namespace "eww-right-panel"
   :monitor "DP-1"
   :geometry (geometry
-              :anchor "center"
+              :anchor "top right"
               :width "50px"
               :height "100%")
   :backend_options (wayland
-    :exclusive true
+    :exclusive false
     :namespace "eww-right-panel")
   (right-panel)) 
 
