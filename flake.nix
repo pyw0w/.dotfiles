@@ -25,7 +25,11 @@
 
     fenix.url = "github:nix-community/fenix";
 
-    catppuccin.url = "github:catppuccin/nix";
+    niri.url = "github:sodiboo/niri-flake";
+
+    waybar.url = "github:Alexays/Waybar";
+
+    stylix.url = "github:nix-community/stylix/release-25.05";
 
     vscode-server.url = "github:nix-community/nixos-vscode-server";
 

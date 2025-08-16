@@ -18,9 +18,12 @@
         backupFileExtension = "hm-bkp-${builtins.toString builtins.currentTime}";
 
         users.supa = {
+          _module.args = { inherit inputs; };
           imports = [
-            ./home.nix
-            inputs.catppuccin.homeModules.default
+            ./home
+            inputs.stylix.homeModules.stylix
+            inputs.niri.homeModules.config
+            inputs.niri.homeModules.stylix
           ];
         };
       };
@@ -123,7 +126,7 @@
       enable = true;
       settings = {
         default_session = {
-          command = ''${lib.getExe pkgs.greetd.tuigreet} --time --cmd "sway --unsupported-gpu"'';
+          command = ''${lib.getExe pkgs.greetd.tuigreet} --time --cmd niri-session'';
           user = "supa";
         };
       };
@@ -236,9 +239,9 @@
   };
 
   programs = {
-    sway = {
+    niri = {
       enable = true;
-      wrapperFeatures.gtk = true;
+      package = pkgs.niri-unstable;
     };
 
     # firefox.enable = true;
@@ -267,6 +270,7 @@
         obs-gstreamer
         waveform
         obs-pipewire-audio-capture
+        obs-vkcapture
       ];
     };
   };
