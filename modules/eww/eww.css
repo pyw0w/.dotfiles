@@ -1,199 +1,164 @@
-window {
-    border-radius: 15px;
-    border: 4px solid rgba(255, 255, 255, 0.05);
-    background-color: rgba(26, 25, 26, 0.15);
-    font-family: "JetBrainsMonoNL Nerd Font";
-    font-size: 22.5px;
-    color: #F7F1FF;
-}
 
-.circle-condition-text {
-    font-size: 15px;
-    margin-top: 2.5px;
-}
 
-.main-box {
-    margin: 20px;
-}
 
-.time {
-    font-size: 100px;
-    color: #F7F1FF;
-    font-weight: bold;
-}
 
-.inner-circle {
-    color: transparent;
-}
-
-.outer-circle {
-    background: rgba(255, 255, 255, 0.2);
-}
-
-/* Removed system-info-panel styles - no longer needed */
 
 /* ========================================
-   RIGHT PANEL STYLES - COMPLETELY SEPARATE
+   RIGHT PANEL STYLES - MODERN UI DESIGN
    ======================================== */
 
-/* Main right panel container */
 .right-panel {
-    background: linear-gradient(180deg, 
-        rgba(20, 20, 25, 0.95) 0%,
-        rgba(30, 30, 35, 0.95) 50%,
-        rgba(20, 20, 25, 0.95) 100%);
-    border-left: 3px solid rgba(100, 150, 255, 0.6);
-    box-shadow: -8px 0 25px rgba(0, 0, 0, 0.7);
-    /* backdrop-filter: blur(15px); - not supported in EWW */
-    border-radius: 0 0 0 15px;
+    margin-left: 0;
+    border-radius: 16px 0 0 16px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-family: "JetBrainsMonoNL Nerd Font", "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.95);
+    box-shadow: 
+        -8px 0 32px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(255, 255, 255, 0.05);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* System info container within right panel */
+
+/* System info container - Modern Card Design */
 .right-panel .system-info {
-    background: rgba(15, 15, 20, 0.8);
-    border: 1px solid rgba(100, 150, 255, 0.3);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 12px;
-    padding: 15px 8px;
-    margin: 10px 5px;
-    box-shadow: inset 0 0 10px rgba(100, 150, 255, 0.1);
+    padding: 16px 8px;
+    margin: 12px 6px;
+    box-shadow: 
+        0 4px 16px rgba(0, 0, 0, 0.1),
+        0 1px 4px rgba(255, 255, 255, 0.05);
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.95);
+    transition: all 0.2s ease;
+    backdrop-filter: blur(10px);
 }
 
 /* Individual metric boxes */
 .right-panel .metric-box {
-    background: rgba(25, 25, 35, 0.9);
-    border: 1px solid rgba(100, 150, 255, 0.2);
-    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
     padding: 8px 6px;
-    margin: 8px 0;
-    /* text-align: center; - not supported in EWW */
-    transition: all 0.3s ease;
+    margin: 6px 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(5px);
 }
 
 .right-panel .metric-box:hover {
-    background: rgba(35, 35, 45, 0.95);
-    border-color: rgba(100, 150, 255, 0.5);
-    /* transform: translateX(-2px); - not supported in EWW */
-    box-shadow: 0 0 15px rgba(100, 150, 255, 0.3);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(-1px);
 }
 
 /* Metric icons */
 .right-panel .metric-icon {
     font-size: 16px;
     margin-bottom: 4px;
-    color: rgba(100, 150, 255, 0.9);
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s ease;
 }
 
 /* Metric values */
 .right-panel .metric-value {
     font-size: 12px;
-    font-weight: bold;
+    font-weight: 600;
     color: rgba(255, 255, 255, 0.95);
     margin-bottom: 2px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    letter-spacing: 0.2px;
 }
 
 /* Metric labels */
 .right-panel .metric-label {
     font-size: 10px;
-    color: rgba(200, 200, 200, 0.7);
-    /* text-transform: uppercase; - not supported in EWW */
-    letter-spacing: 0.5px;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
 }
 
 /* Time and date in right panel */
 .right-panel .time-right {
     font-size: 14px;
-    font-weight: bold;
-    color: rgba(100, 150, 255, 0.9);
-    /* text-align: center; - not supported in EWW */
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.95);
     margin: 8px 0;
-    padding: 8px;
-    background: rgba(20, 25, 35, 0.8);
-    border-radius: 8px;
-    border: 1px solid rgba(100, 150, 255, 0.3);
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s ease;
+    backdrop-filter: blur(10px);
 }
 
 .right-panel .date-right {
     font-size: 11px;
-    color: rgba(180, 180, 180, 0.8);
-    /* text-align: center; - not supported in EWW */
-    margin: 4px 0;
-    padding: 6px;
-    background: rgba(15, 20, 25, 0.6);
-    border-radius: 6px;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+    margin: 6px 0;
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+    backdrop-filter: blur(5px);
 }
 
-/* Progress bars for system metrics */
+/* Progress bars */
 .right-panel .progress-bar {
-    background: rgba(20, 20, 25, 0.8);
-    border-radius: 4px;
-    /* height: 6px; - not supported in EWW */
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 6px;
     margin: 4px 0;
-    /* overflow: hidden; - not supported in EWW */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    height: 6px;
 }
 
 .right-panel .progress-fill {
-    /* height: 100%; - not supported in EWW */
-    border-radius: 4px;
-    /* transition: width 0.5s ease; - not supported in EWW */
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
 }
 
 .right-panel .progress-fill.cpu {
-    background: linear-gradient(90deg, #4ade80, #22c55e);
+    background: linear-gradient(90deg, #3b82f6, #1d4ed8);
 }
 
 .right-panel .progress-fill.ram {
-    background: linear-gradient(90deg, #fbbf24, #f59e0b);
+    background: linear-gradient(90deg, #10b981, #059669);
 }
 
 .right-panel .progress-fill.disk {
-    background: linear-gradient(90deg, #f87171, #ef4444);
+    background: linear-gradient(90deg, #f59e0b, #d97706);
 }
 
 .right-panel .progress-fill.temp {
-    background: linear-gradient(90deg, #fb923c, #ea580c);
+    background: linear-gradient(90deg, #ef4444, #dc2626);
 }
 
-/* Start button styles removed - not needed anymore */
 
-.system-info {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 8px;
-    padding: 8px 15px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
+/* ========================================
+   WORKSPACE STYLES
+   ======================================== */
 
-.time-bottom {
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.date-bottom {
-    font-size: 12px;
-    color: rgba(247, 241, 255, 0.7);
-}
-
-/* Main desktop widget date styles */
-.date {
-    font-size: 18px;
-    color: rgba(247, 241, 255, 0.8);
-    font-weight: 500;
-}
-
-.date-day {
-    font-size: 16px;
-    color: rgba(247, 241, 255, 0.9);
-    font-weight: 600;
-}
-
-/* Workspace styles */
 .workspace {
     background: rgba(255, 255, 255, 0.1);
     border-radius: 8px;
     padding: 8px 12px;
-    /* transition: all 0.2s ease; - not supported in EWW */
 }
 
 .workspace:hover {
     background: rgba(255, 255, 255, 0.2);
-    /* transform: scale(1.05); - not supported in EWW */
 }

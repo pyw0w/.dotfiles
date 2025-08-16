@@ -60,21 +60,6 @@
   :initial '{"DP-1":{"1":true,"2":false,"3":false,"4":false,"5":false,"6":false,"7":false,"8":false,"9":false}}'
   "~/.config/eww/scripts/workspaces/get-all.sh")
 
-; monitor: name of monitor to watch workspaces, e.g. DP-1
-; elevate: elevate the widget if true
-(defwindow desktop [monitor elevate]
-  :stacking {elevate ? "overlay" : "bottom"}
-  :exclusive false ; dont reserve WM space
-  :focusable false ; does not need keyboard input
-  :namespace "eww-desktop-widget"
-  :monitor "DP-1"
-  :geometry (geometry
-              :anchor "center"
-              ; small window, stretches to fit content
-              :width  "1%"
-              :height "1%")
-  (desktop :monitor monitor))
-
 ; Right panel like Windows taskbar
 (defwindow right-panel
   :stacking "overlay"
@@ -91,41 +76,7 @@
     :namespace "eww-right-panel")
   (right-panel)) 
 
-; monitor: name of monitor to watch workspaces, e.g. DP-1
-(defwidget desktop [monitor] 
-  (box
-    :class "main-box"
-    :orientation "v"
-    :space-evenly false
-    :spacing -10
-    (box
-      :space-evenly false
-      :spacing 15
-      (eventbox
-        :onscroll 'eww update is-laptop=${!is-laptop}'
-        (box
-          :space-evenly false
-          :spacing 25
-          (circular-battery)
-          (circular-network)
-          (circular-cpu)
-          (circular-ram)))
-      (label
-        :show-truncated false
-        :class "time"
-        :text {formattime(EWW_TIME, "%R")}
-        :tooltip {formattime(EWW_TIME, "%T")})
-      (box
-        :orientation "v"
-        :spacing -50
-        (overlay
-          ; overlay with transparent longest possible value
-          ; => visible box size always stays the same
-          ; => no centering problems
-          (label :show-truncated false :text "Wednesday" :style "color: transparent")
-          (label :show-truncated false :text {date.day} :class "date-day"))
-        (label :show-truncated false :text {date.date} :class "date")))
-    (workspaces :monitor monitor)))
+
 
 ; monitor: name of monitor to watch workspaces, e.g. DP-1
 (defwidget workspaces [monitor]
