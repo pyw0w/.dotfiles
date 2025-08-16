@@ -49,6 +49,11 @@
   :initial '{"total":0,"running":0,"sleeping":0}'
   "~/.config/eww/scripts/processes.sh")
 
+(defpoll current-language :interval "2s"
+  ; current keyboard layout
+  :initial "US"
+  "~/.config/eww/scripts/current-language.sh")
+
 (deflisten workspaces
   ; active and occupied hyprland workspaces for each monitor,
   ; e.g. {"HDMI-A-1":{"1":true},"DP-1":{"1":true}}
@@ -275,7 +280,14 @@
         (label
           :show-truncated false
           :class "date-bottom"
-          :text {date.date})))))
+          :text {date.date}))
+      ; Current Language
+      (box
+        :orientation "v"
+        :halign "center"
+        :spacing 3
+        (label :text "🌐" :style "font-size: 16px;")
+        (label :text {current-language} :style "font-size: 12px;")))))
 
 (defwidget circular-cpu []
   (circular-progress-fancy
