@@ -57,7 +57,7 @@
 (deflisten workspaces
   ; active and occupied hyprland workspaces for each monitor,
   ; e.g. {"HDMI-A-1":{"1":true},"DP-1":{"1":true}}
-  :initial '{}'
+  :initial '{"DP-1":{"1":true,"2":false,"3":false,"4":false,"5":false,"6":false,"7":false,"8":false,"9":false}}'
   "~/.config/eww/scripts/workspaces/get-all.sh")
 
 ; monitor: name of monitor to watch workspaces, e.g. DP-1
@@ -83,7 +83,7 @@
   :namespace "eww-right-panel"
   :monitor "DP-1"
   :geometry (geometry
-              :anchor "top right"
+              :anchor "center"
               :width "50px"
               :height "100%")
   :backend_options (wayland
@@ -123,8 +123,8 @@
           ; => visible box size always stays the same
           ; => no centering problems
           (label :show-truncated false :text "Wednesday" :style "color: transparent")
-          (label :show-truncated false :text {date.day}))
-        (label :show-truncated false :text {date.date})))
+          (label :show-truncated false :text {date.day} :class "date-day"))
+        (label :show-truncated false :text {date.date} :class "date")))
     (workspaces :monitor monitor)))
 
 ; monitor: name of monitor to watch workspaces, e.g. DP-1
@@ -149,54 +149,7 @@
             :text {workspaces[monitor][i] == "true"  ? "󰟒" :
                    workspaces[monitor][i] == "false" ? "󰝥" : "󰄰"})))))) ; nerdfont characters
 
-; monitor: name of monitor to watch workspaces, e.g. DP-1
-(defwidget system-info-panel [monitor]
-  (box
-    :class "system-info-panel"
-    :orientation "h"
-    :halign "center"
-    :spacing 20
-    :style "margin-top: 15px; padding: 10px; background: rgba(0, 0, 0, 0.2); border-radius: 10px;"
-    ; Disk usage
-    (box
-      :orientation "v"
-      :halign "center"
-      :spacing 5
-      (label :text "💾" :style "font-size: 18px;")
-      (label :text {disk.used_percent} :style "font-size: 14px;")
-      (label :text {disk.used} :style "font-size: 12px; color: rgba(247, 241, 255, 0.7);"))
-    ; Temperature
-    (box
-      :orientation "v"
-      :halign "center"
-      :spacing 5
-      (label :text "🌡️" :style "font-size: 18px;")
-      (label :text {temperature.temperature} :style "font-size: 14px;")
-      (label :text "°C" :style "font-size: 12px; color: rgba(247, 241, 255, 0.7);"))
-    ; System load
-    (box
-      :orientation "v"
-      :halign "center"
-      :spacing 5
-      (label :text "📊" :style "font-size: 18px;")
-      (label :text {system-load.load1} :style "font-size: 14px;")
-      (label :text "load" :style "font-size: 12px; color: rgba(247, 241, 255, 0.7);"))
-    ; Processes
-    (box
-      :orientation "v"
-      :halign "center"
-      :spacing 5
-      (label :text "⚙️" :style "font-size: 18px;")
-      (label :text {processes.total} :style "font-size: 14px;")
-      (label :text "proc" :style "font-size: 12px; color: rgba(247, 241, 255, 0.7);"))
-    ; Uptime
-    (box
-      :orientation "v"
-      :halign "center"
-      :spacing 5
-      (label :text "⏱️" :style "font-size: 18px;")
-      (label :text {system-load.uptime} :style "font-size: 14px;")
-      (label :text "up" :style "font-size: 12px; color: rgba(247, 241, 255, 0.7);"))))
+; Removed system-info-panel widget - no longer needed
 
 ; Right panel widget - System info only
 (defwidget right-panel []
