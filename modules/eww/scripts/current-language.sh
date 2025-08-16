@@ -5,11 +5,13 @@
 
 # Method 1: Try to get from hyprctl (for Hyprland)
 if command -v hyprctl >/dev/null 2>&1; then
-    current_layout=$(hyprctl devices | grep -A 10 "Keyboard" | grep "layout:" | head -1 | awk '{print $2}' | cut -d',' -f1)
-    if [ -n "$current_layout" ]; then
+    # Find the main keyboard (main: yes) and get its active keymap
+    main_keyboard_section=$(hyprctl devices | grep -B 15 -A 5 "main: yes" | grep "active keymap:" | tail -1)
+    if [ -n "$main_keyboard_section" ]; then
+        current_layout=$(echo "$main_keyboard_section" | awk '{print $3}')
         case $current_layout in
-            "us") echo "US";;
-            "ru") echo "RU";;
+            "English") echo "US";;
+            "Russian") echo "RU";;
             *) echo "$current_layout";;
         esac
         exit 0
