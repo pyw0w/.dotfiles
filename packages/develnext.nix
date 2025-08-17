@@ -1,4 +1,6 @@
-{ lib, stdenv, fetchurl, makeWrapper, jdk8 }:
+{ lib, stdenv, fetchurl, makeWrapper,
+  xorg, libGL, libglvnd, mesa, gtk2, freetype, fontconfig,
+  glib, pango, cairo, gdk-pixbuf, atk, cups }:
 stdenv.mkDerivation rec {
   pname = "develnext";
   version = "16.7.0";
@@ -21,10 +23,18 @@ stdenv.mkDerivation rec {
     # extract archive directly into share dir (archive contains multiple top-level entries)
     tar -xzf "$src" -C $out/share/develnext
 
+    # wrapper that runs bundled launcher (uses bundled JRE with JavaFX)
     mkdir -p $out/bin
-    makeWrapper ${jdk8}/bin/java $out/bin/develnext \
+    makeWrapper $out/share/develnext/DevelNext $out/bin/develnext \
       --chdir $out/share/develnext \
-      --add-flags "-jar $out/share/develnext/DevelNext.jar"
+      --set JAVA_HOME $out/share/develnext/tools/jre \
+      --prefix PATH : $out/share/develnext/tools/jre/bin \
+      --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath [ libGL libglvnd xorg.libX11 xorg.libXext xorg.libXrender xorg.libXrandr xorg.libXi xorg.libXtst xorg.libXcursor xorg.libXinerama xorg.libXdamage xorg.libXfixes xorg.libXcomposite xorg.libXxf86vm xorg.libXdmcp xorg.libXau xorg.libxcb freetype fontconfig gtk2 glib pango cairo gdk-pixbuf atk cups ]} \
+      --set LIBGL_DRIVERS_PATH ${mesa.drivers}/lib/dri \
+      --set GDK_BACKEND x11 \
+      --set _JAVA_AWT_WM_NONREPARENTING 1 \
+      --set JDK_JAVA_OPTIONS "-Dglass.platform=x11 -Dprism.order=es2,sw" \
+      --set LIBGL_ALWAYS_SOFTWARE 0
 
     runHook postInstall
   '';

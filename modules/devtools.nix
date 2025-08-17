@@ -5,7 +5,7 @@ let
 in
 {
   options.local.devtools = {
-    java  .enable = lib.mkEnableOption "whether to enable java devtools";
+    java.enable = lib.mkEnableOption "whether to enable java devtools";
     docker.enable = lib.mkEnableOption "whether to enable docker devtools";
     python.enable = lib.mkEnableOption "whether to enable python devtools";
   };
