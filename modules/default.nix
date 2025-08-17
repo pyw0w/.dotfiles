@@ -24,7 +24,6 @@
     ./onedrive.nix
     ./piper.nix
     ./playerctl.nix
-    ./sops.nix
     ./steam.nix
     ./cursor.nix
     ./develnext.nix

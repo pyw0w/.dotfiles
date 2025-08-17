@@ -11,9 +11,6 @@
     nixos-hardware.url = "github:nixos/nixos-hardware";
     # nixpkgs to avoid expensive cache misses of couchdb and dependencies on aarch64
     couchdb-aarch64-nixpkgs.url = "github:nixos/nixpkgs?rev=eb0e0f21f15c559d2ac7633dc81d079d1caf5f5f";
-    # lamp-server removed - no govee rgb lamp needed
-    # terralux-backend removed - no reptile terrarium needed
-    # minecraft-server removed - no minecraft server needed
     # hyprland (to manage version independently of other packages)
     hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1&ref=refs/tags/v0.50.1";
     # hyprland plugin for better multi-monitor workspaces, matching hyprland version: ^v^v^v^
@@ -22,18 +19,12 @@
     # nix user repository (more packages)
     nur = { url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs"; };
-    # secret management with sops
-    sops-nix = { url = "github:Mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs"; };
-    # website removed - no longer needed
     # declarative disk management
     disko = { url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs"; };
     # declarative database for command-not-found
     programs-sqlite = { url = "github:wamserma/flake-programs-sqlite";
       inputs.nixpkgs.follows = "nixpkgs-unstable"; };
-    # wsl utils removed - no WSL needed
-    # vscode-server removed - no WSL needed
     # declarative discord config
     nixcord = { url = "github:kaylorben/nixcord";
       inputs.nixpkgs.follows = "nixpkgs"; };

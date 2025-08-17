@@ -30,7 +30,7 @@ stdenv.mkDerivation rec {
       --set JAVA_HOME $out/share/develnext/tools/jre \
       --prefix PATH : $out/share/develnext/tools/jre/bin \
       --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath [ libGL libglvnd xorg.libX11 xorg.libXext xorg.libXrender xorg.libXrandr xorg.libXi xorg.libXtst xorg.libXcursor xorg.libXinerama xorg.libXdamage xorg.libXfixes xorg.libXcomposite xorg.libXxf86vm xorg.libXdmcp xorg.libXau xorg.libxcb freetype fontconfig gtk2 glib pango cairo gdk-pixbuf atk cups ]} \
-      --set LIBGL_DRIVERS_PATH ${mesa.drivers}/lib/dri \
+      --set LIBGL_DRIVERS_PATH ${mesa}/lib/dri \
       --set GDK_BACKEND x11 \
       --set _JAVA_AWT_WM_NONREPARENTING 1 \
       --set JDK_JAVA_OPTIONS "-Dglass.platform=x11 -Dprism.order=es2,sw" \

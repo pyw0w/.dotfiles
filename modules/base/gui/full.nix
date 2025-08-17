@@ -13,24 +13,15 @@ args@{ config, lib, pkgs, ... }:
     environment.systemPackages = with pkgs; [
       ### gui
       onlyoffice-bin_latest # office suite
-      #gimp-with-plugins # image editor
-      #darktable # photo editor and raw developer
-      #inkscape-with-extensions # vector graphic editor
       veracrypt # disk encryption
       freefilesync # file backup
-      # jetbrains-gitclient removed - no longer needed
       (prismlauncher.override { jdks = [ jdk ]; }) # minecraft
-      #foliate # ebook reader
-      #bottles # run windows software easily
-      #usbimager # create bootable usb stick
-      #obs-studio # video recording
-      #font-manager # font manager
-      #pitivi # video editor
-      #tenacity # audio recorder and editor
+      bottles # run windows software easily
+      usbimager # create bootable usb stick
+      obs-studio # video recording
 
       ### cli
       dunst # for better notify-send with dunstify
-      #gphoto2fs # mount camera
     ];
   };
 }

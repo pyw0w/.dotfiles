@@ -42,17 +42,12 @@ args@{ config, lib, pkgs, variables, ... }:
       ### gui
       gparted # partition manager, use with sudo -E gparted
       resources # system monitor (best overall)
-      #monitor # system monitor (best process view) (broken)
       vlc # video player
       qview # image viewer
-      #audacious # audio player
-      #snapshot # camera
-      #signal-desktop # messenger
       networkmanagerapplet # tray icon for networking connection
       xarchiver # archive manager
       baobab # disk usage analyzer
       gnome-disk-utility
-      #spotify # PROPRIETARY
       # gtk theme
       (orchis-theme.override { border-radius = 10; })
       gnome-themes-extra # just having this installed avoids warnings in some apps

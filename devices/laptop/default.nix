@@ -15,7 +15,7 @@ in
   # amd gpu
   hardware.amdgpu.initrd.enable = true;
   hardware.graphics = {
-    package   = mesa-pkgs              .mesa;
+    package   = mesa-pkgs.mesa;
     package32 = mesa-pkgs.pkgsi686Linux.mesa;
   };
 }

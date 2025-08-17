@@ -104,7 +104,6 @@ args@{ lib, pkgs, variables, device, ... }:
 
   local = {
     fish.enable = true;
-    sops.enable = true;
     starship.enable = true;
     fastfetch.enable = true;
     devtools.python.enable = true;
