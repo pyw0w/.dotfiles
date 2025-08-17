@@ -16,9 +16,9 @@ args@{ config, lib, pkgs, ... }:
       veracrypt # disk encryption
       freefilesync # file backup
       (prismlauncher.override { jdks = [ jdk ]; }) # minecraft
-      bottles # run windows software easily
-      usbimager # create bootable usb stick
-      obs-studio # video recording
+      #bottles # run windows software easily
+      #usbimager # create bootable usb stick
+      #obs-studio # video recording
 
       ### cli
       dunst # for better notify-send with dunstify
