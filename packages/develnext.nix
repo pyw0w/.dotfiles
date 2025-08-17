@@ -1,6 +1,6 @@
 { lib, stdenv, fetchurl, makeWrapper,
   xorg, libGL, libglvnd, mesa, gtk2, freetype, fontconfig,
-  glib, pango, cairo, gdk-pixbuf, atk, cups }:
+  glib, pango, cairo, gdk-pixbuf, atk, cups, imagemagick }:
 stdenv.mkDerivation rec {
   pname = "develnext";
   version = "16.7.0";
@@ -12,7 +12,7 @@ stdenv.mkDerivation rec {
     name = "develnext-${version}.tar.gz";
   };
 
-  nativeBuildInputs = [ makeWrapper ];
+  nativeBuildInputs = [ makeWrapper imagemagick ];
 
   dontUnpack = true;
 
@@ -35,6 +35,40 @@ stdenv.mkDerivation rec {
       --set _JAVA_AWT_WM_NONREPARENTING 1 \
       --set JDK_JAVA_OPTIONS "-Dglass.platform=x11 -Dprism.order=es2,sw" \
       --set LIBGL_ALWAYS_SOFTWARE 0
+
+    # install icon and desktop entry
+    mkdir -p $out/share/applications
+    cat > $out/share/applications/develnext.desktop <<EOF
+[Desktop Entry]
+Name=DevelNext
+Comment=GUI IDE for JPHP
+Exec=develnext %F
+Terminal=false
+Type=Application
+Categories=Development;IDE;
+Icon=develnext
+StartupNotify=true
+EOF
+
+    # Preferred: use original ICO from distribution to generate hicolor icons
+    ICO="$out/share/develnext/projectExtension.ico"
+    if [ -f "$ICO" ]; then
+      for size in 256 128 64 48 32 16; do
+        mkdir -p "$out/share/icons/hicolor/"$size"x"$size"/apps"
+        ${imagemagick}/bin/convert "$ICO" -alpha on -background none -resize "$size"x"$size" "$out/share/icons/hicolor/"$size"x"$size"/apps/develnext.png"
+      done
+      # pixmaps symlink to common 128px
+      mkdir -p $out/share/pixmaps
+      ln -s $out/share/icons/hicolor/128x128/apps/develnext.png $out/share/pixmaps/develnext.png
+    else
+      # Fallback: use bundled language icon if ICO is missing
+      mkdir -p $out/share/icons/hicolor/128x128/apps
+      mkdir -p $out/share/pixmaps
+      if [ -f $out/share/develnext/languages/en/icon.png ]; then
+        cp $out/share/develnext/languages/en/icon.png $out/share/icons/hicolor/128x128/apps/develnext.png
+        ln -s $out/share/icons/hicolor/128x128/apps/develnext.png $out/share/pixmaps/develnext.png
+      fi
+    fi
 
     runHook postInstall
   '';
