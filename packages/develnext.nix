@@ -36,7 +36,7 @@ stdenv.mkDerivation rec {
       --set JDK_JAVA_OPTIONS "-Dglass.platform=x11 -Dprism.order=es2,sw" \
       --set LIBGL_ALWAYS_SOFTWARE 0
 
-    # install icon and desktop entry
+    # install desktop entry
     mkdir -p $out/share/applications
     cat > $out/share/applications/develnext.desktop <<EOF
 [Desktop Entry]
@@ -55,19 +55,25 @@ EOF
     if [ -f "$ICO" ]; then
       for size in 256 128 64 48 32 16; do
         mkdir -p "$out/share/icons/hicolor/"$size"x"$size"/apps"
-        ${imagemagick}/bin/convert "$ICO" -alpha on -background none -resize "$size"x"$size" "$out/share/icons/hicolor/"$size"x"$size"/apps/develnext.png"
+        ${imagemagick}/bin/convert "$ICO" -alpha on -background none -resize "$size"x"$size" "$out/share/icons/hicolor/"$size"x"$size"/apps/develnext.png" || true
       done
-      # pixmaps symlink to common 128px
-      mkdir -p $out/share/pixmaps
-      ln -s $out/share/icons/hicolor/128x128/apps/develnext.png $out/share/pixmaps/develnext.png
-    else
-      # Fallback: use bundled language icon if ICO is missing
-      mkdir -p $out/share/icons/hicolor/128x128/apps
-      mkdir -p $out/share/pixmaps
+    fi
+
+    # If 128x128 doesn't exist, fallback to bundled PNG or generate single size from ICO
+    PNG128="$out/share/icons/hicolor/128x128/apps/develnext.png"
+    if [ ! -f "$PNG128" ]; then
+      mkdir -p "$out/share/icons/hicolor/128x128/apps"
       if [ -f $out/share/develnext/languages/en/icon.png ]; then
-        cp $out/share/develnext/languages/en/icon.png $out/share/icons/hicolor/128x128/apps/develnext.png
-        ln -s $out/share/icons/hicolor/128x128/apps/develnext.png $out/share/pixmaps/develnext.png
+        cp $out/share/develnext/languages/en/icon.png "$PNG128"
+      elif [ -f "$ICO" ]; then
+        ${imagemagick}/bin/convert "$ICO[0]" -alpha on -background none -resize 128x128 "$PNG128" || true
       fi
+    fi
+
+    # Create pixmaps symlink only if 128x128 icon exists
+    if [ -f "$PNG128" ]; then
+      mkdir -p $out/share/pixmaps
+      ln -s "$PNG128" $out/share/pixmaps/develnext.png
     fi
 
     runHook postInstall
