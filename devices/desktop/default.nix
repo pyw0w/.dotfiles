@@ -7,6 +7,7 @@ args@{ config, pkgs, variables, lib, ... }:
     nvidia.enable = true;
     piper.enable = true;
     playerctl.enable = true;
+    develnext.enable = true;
   };
 
   # more swap, couldnt figure out how to change it using disko/btrfs
@@ -19,7 +20,7 @@ args@{ config, pkgs, variables, lib, ... }:
   boot.extraModprobeConfig = "options snd_usb_audio vid=0x1235 pid=0x8211 device_setup=1";
 
   environment.systemPackages = with pkgs; [
-    alsa-scarlett-gui # control center for focusrite usb audio interface
+    # alsa-scarlett-gui # control center for focusrite usb audio interface
     # liquidctl # liquid cooler control (removed - no hardware)
     # to mount encrypted data partition
     zenity # password prompt
@@ -78,6 +79,7 @@ args@{ config, pkgs, variables, lib, ... }:
   #   serviceConfig = {
   #     User = "root";
   #     Type = "oneshot";
+  #     RemainAfterExit = "yes";
   #     ExecStart = [
   #       "${pkgs.liquidctl}/bin/liquidctl initialize all"
   #       "${pkgs.liquidctl}/bin/liquidctl --match kraken set pump speed 30 55 40 100"

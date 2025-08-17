@@ -2,4 +2,5 @@
 { pkgs, ... }:
 {
   sddm-sugar-candy = pkgs.callPackage ./sddm-sugar-candy.nix {};
+  develnext = pkgs.callPackage ./develnext.nix {};
 }

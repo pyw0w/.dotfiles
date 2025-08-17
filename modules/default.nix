@@ -28,5 +28,6 @@
     ./sops.nix
     ./steam.nix
     ./cursor.nix
+    ./develnext.nix
   ];
 }

@@ -45,14 +45,14 @@ args@{ config, lib, pkgs, variables, ... }:
       #monitor # system monitor (best process view) (broken)
       vlc # video player
       qview # image viewer
-      audacious # audio player
+      #audacious # audio player
       #snapshot # camera
-      signal-desktop # messenger
+      #signal-desktop # messenger
       networkmanagerapplet # tray icon for networking connection
       xarchiver # archive manager
       baobab # disk usage analyzer
       gnome-disk-utility
-      spotify # PROPRIETARY
+      #spotify # PROPRIETARY
       # gtk theme
       (orchis-theme.override { border-radius = 10; })
       gnome-themes-extra # just having this installed avoids warnings in some apps
