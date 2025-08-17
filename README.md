@@ -6,7 +6,6 @@
 
 ### 🙏 **Благодарности**
 - **Основная конфигурация**: [julius-boettger/dotfiles](https://github.com/julius-boettger/dotfiles) - базовая структура и модули
-- **Awesome WM тема**: основана на "rainbow" теме [awesome-copycats](https://github.com/lcpz/awesome-copycats)
 - **Rofi темы**: основаны на "rounded" теме [rofi-themes-collection](https://github.com/newmanls/rofi-themes-collection)
 - **Обои**: модифицированные версии из [nixos-artwork](https://github.com/NixOS/nixos-artwork)
 
@@ -34,9 +33,8 @@
 
 ## 🖥️ **Что включено**
 
-### **Два полнофункциональных десктопных сеанса:**
-- **[Awesome](https://github.com/awesomeWM/awesome)** (на Xorg)
-- **[Hyprland](https://hyprland.org/)** (на Wayland)
+### **Десктопный сеанс:**
+- **[Hyprland](https://hyprland.org/)** (Wayland)
 
 ### **Поддерживаемые устройства:**
 - `devices/desktop/` - настольный компьютер

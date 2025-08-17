@@ -41,9 +41,6 @@ args@{ config, pkgs, variables, lib, ... }:
   home-manager.users.${variables.username} = { config, ... }: {
     home.file."Library".source = config.lib.file.mkOutOfStoreSymlink "/mnt/data/Library";
   };
-
-  # monitor config with xrandr command
-  services.xserver.displayManager.setupCommands = "${pkgs.xorg.xrandr}/bin/xrandr --output HDMI-0 --mode 1920x1080 --pos 0x100 --rate 60 --output DP-0 --mode 2560x1440 --pos 1920x0 --rate 144 --primary --preferred";
   
   # mouse sens config
   services.libinput.mouse.accelSpeed = "-0.7";
@@ -63,14 +60,9 @@ args@{ config, pkgs, variables, lib, ... }:
   #   ];
   # };
 
-  # Keyboard layouts
-  services.xserver.xkb.layout = lib.mkForce "us,ru";
-  services.xserver.xkb.variant = lib.mkForce ",";
-  services.xserver.xkb.options = lib.mkForce "grp:alt_shift_toggle,grp_led:scroll";
-
   # Console keyboard layout
   console.keyMap = "us";
-
+  
   # liquidctl service removed - no liquid cooler currently connected
   # Uncomment and modify the following if you add a liquid cooler:
   # systemd.services.liquidctl = {

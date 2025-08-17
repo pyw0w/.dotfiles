@@ -89,7 +89,6 @@ args@{ config, lib, pkgs, variables, ... }:
     local = {
       alacritty.enable = true;
       hyprland.enable = true;
-      awesome.enable = true;
       copyq.enable = true;
       eww.enable = true;
       rofi.enable = true;
@@ -105,6 +104,7 @@ args@{ config, lib, pkgs, variables, ... }:
     };
 
     services.displayManager.sddm.enable = true;
+    services.displayManager.sddm.wayland.enable = true;
 
     # configure various app settings
     programs.dconf.enable = true;
