@@ -1,93 +1,69 @@
-
-
-
-
-
 /* ========================================
-   RIGHT PANEL STYLES - MODERN UI DESIGN
+   RIGHT PANEL - MODERN UI
    ======================================== */
 
-.right-panel {
-    margin-left: 0;
+   .right-panel {
     border-radius: 16px 0 0 16px;
     background: rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    font-family: "JetBrainsMonoNL Nerd Font", "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: "JetBrainsMonoNL Nerd Font", "Inter", sans-serif;
     font-size: 12px;
     color: rgba(255, 255, 255, 0.95);
-    box-shadow: 
-        -8px 0 32px rgba(0, 0, 0, 0.3),
-        0 0 0 1px rgba(255, 255, 255, 0.05);
+    box-shadow: -8px 0 32px rgba(0, 0, 0, 0.3);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 16px 0;
 }
 
-
-/* System info container - Modern Card Design */
-.right-panel .system-info {
+/* --- Блоки метрик --- */
+.system-info {
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 12px;
-    padding: 16px 8px;
-    margin: 12px 6px;
-    box-shadow: 
-        0 4px 16px rgba(0, 0, 0, 0.1),
-        0 1px 4px rgba(255, 255, 255, 0.05);
-    font-size: 12px;
-    color: rgba(255, 255, 255, 0.95);
-    transition: all 0.2s ease;
+    padding: 12px 8px;
+    margin: 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(10px);
 }
 
-/* Individual metric boxes */
-.right-panel .metric-box {
+.metric-box {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.06);
     border-radius: 10px;
-    padding: 8px 6px;
+    padding: 6px;
     margin: 6px 0;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.2s ease;
     backdrop-filter: blur(5px);
 }
-
-.right-panel .metric-box:hover {
+.metric-box:hover {
     background: rgba(255, 255, 255, 0.08);
     border-color: rgba(255, 255, 255, 0.15);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
     transform: translateY(-1px);
 }
 
-/* Metric icons */
-.right-panel .metric-icon {
+.metric-icon {
     font-size: 16px;
     margin-bottom: 4px;
     color: rgba(255, 255, 255, 0.9);
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    transition: all 0.2s ease;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
-/* Metric values */
-.right-panel .metric-value {
+.metric-value {
     font-size: 12px;
     font-weight: 600;
-    color: rgba(255, 255, 255, 0.95);
     margin-bottom: 2px;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-    letter-spacing: 0.2px;
+    color: rgba(255, 255, 255, 0.95);
 }
 
-/* Metric labels */
-.right-panel .metric-label {
+.metric-label {
     font-size: 10px;
     color: rgba(255, 255, 255, 0.6);
-    font-weight: 500;
-    letter-spacing: 0.3px;
     text-transform: uppercase;
 }
 
-/* Time and date in right panel */
-.right-panel .time-right {
+/* --- Время и дата --- */
+.time-right {
     font-size: 14px;
     font-weight: 700;
     color: rgba(255, 255, 255, 0.95);
@@ -96,69 +72,83 @@
     background: rgba(255, 255, 255, 0.08);
     border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-    transition: all 0.2s ease;
-    backdrop-filter: blur(10px);
+    text-align: center;
 }
 
-.right-panel .date-right {
+.date-right {
     font-size: 11px;
     color: rgba(255, 255, 255, 0.8);
     font-weight: 500;
     margin: 6px 0;
-    padding: 8px;
+    padding: 6px;
     background: rgba(255, 255, 255, 0.05);
-    border-radius: 10px;
+    border-radius: 8px;
     border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
-    transition: all 0.2s ease;
-    backdrop-filter: blur(5px);
+    text-align: center;
 }
 
-/* Progress bars */
-.right-panel .progress-bar {
+/* --- Совмещённый блок даты и времени --- */
+.datetime-block {
+    margin: 8px 0;
+    padding: 10px;
     background: rgba(255, 255, 255, 0.08);
-    border-radius: 6px;
-    margin: 4px 0;
+    border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    overflow: hidden;
-    height: 6px;
+    text-align: center;
+}
+.datetime-block .time-right,
+.datetime-block .date-right {
+    background: transparent;
+    border: none;
+    margin: 0;
+    padding: 0;
 }
 
-.right-panel .progress-fill {
-    border-radius: 6px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s ease;
+/* --- Tooltip for temperatures --- */
+.temperature-box {
+    position: relative;
+}
+.temps-tooltip {
+    margin-top: 6px;
+    padding: 8px 10px;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    font-size: 11px;
+    line-height: 1.3;
+    white-space: pre;
 }
 
-.right-panel .progress-fill.cpu {
-    background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+/* Temps popup */
+.temps-popup {
+	background: rgba(20, 20, 20, 0.92);
+	backdrop-filter: blur(12px);
+	border: 1px solid rgba(255, 255, 255, 0.12);
+	border-radius: 12px;
+	padding: 12px;
+	color: rgba(255, 255, 255, 0.95);
+}
+.temps-popup-title {
+	font-size: 13px;
+	margin-bottom: 4px;
+}
+.temps-popup-text {
+	font-family: "JetBrainsMonoNL Nerd Font", "Inter", sans-serif;
+	font-size: 12px;
+	white-space: pre;
+	line-height: 1.35;
 }
 
-.right-panel .progress-fill.ram {
-    background: linear-gradient(90deg, #10b981, #059669);
-}
-
-.right-panel .progress-fill.disk {
-    background: linear-gradient(90deg, #f59e0b, #d97706);
-}
-
-.right-panel .progress-fill.temp {
-    background: linear-gradient(90deg, #ef4444, #dc2626);
-}
-
-
-/* ========================================
-   WORKSPACE STYLES
-   ======================================== */
-
+/* --- Рабочие столы --- */
 .workspace {
     background: rgba(255, 255, 255, 0.1);
     border-radius: 8px;
-    padding: 8px 12px;
+    padding: 6px 10px;
+    margin: 4px;
+    transition: background 0.2s ease;
 }
-
 .workspace:hover {
     background: rgba(255, 255, 255, 0.2);
 }
+
+

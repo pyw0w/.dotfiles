@@ -1,68 +1,77 @@
-; all labels have `:show-truncated false` because of
-; https://github.com/elkowar/eww/issues/1083
-
-; optimize for laptop usage (based on env var)
+; ========================
+; VARIABLES
+; ========================
 (defvar is-laptop {get_env("IS_LAPTOP") == "1"})
+(defvar temps_hover false)
 
+; ========================
+; FUNCTIONS
+; ========================
+
+; ========================
+; PROGRESS BAR
+; ========================
+
+; ========================
+; POLLS
+; ========================
 (defpoll date :interval "1m"
-  ; json string which eww can parse automatically (` = ' = ")
   :initial '{"date":"01.01.2000","day":"Monday"}'
-  `LC_TIME=en_US.UTF-8 date '+{"date":"%d.%m.%y","day":"%A"}'`) 
+  `LC_TIME=en_US.UTF-8 date '+{"date":"%d.%m.%y","day":"%A"}'`)
 
 (defpoll ram :interval "1s"
-  ; in MB and percent
   :initial '{"total":0,"used":0,"used_percent":0}'
-  "~/.config/eww/scripts/ram-usage.sh") 
+  "~/.config/eww/scripts/ram-usage.sh")
 
 (defpoll logarithmic-cpu :interval "1s"
-  ; in percent
   :initial 0
-  "~/.config/eww/scripts/logarithmic-cpu.sh") 
+  "~/.config/eww/scripts/logarithmic-cpu.sh")
 
-(defpoll battery :interval "5s"
-  ; charge in percent
-  :initial '{"charge":0,"time_remaining":"unknown","charging":false}'
-  "~/.config/eww/scripts/battery.sh") 
-
-(defpoll network :interval "5s"
-  ; signal strength in percent
-  :initial '{"internet":false,"wired":false,"signal_strength":0,"wifi_name":""}'
-  "~/.config/eww/scripts/network.sh") 
-
-(defpoll disk :interval "10s"
-  ; disk usage in GB and percent
-  :initial '{"total":"0G","used":"0G","available":"0G","used_percent":0}'
-  "~/.config/eww/scripts/disk-usage.sh") 
+(defpoll cpu-percent :interval "1s"
+  :initial 0
+  "/etc/dotfiles/modules/eww/scripts/cpu-usage.sh")
 
 (defpoll temperature :interval "5s"
-  ; CPU temperature in Celsius
   :initial '{"temperature":0}'
-  "~/.config/eww/scripts/temperature.sh") 
+  "~/.config/eww/scripts/temperature.sh")
+
+(defpoll temperatures-detail :interval "5s"
+  :initial "No sensor temperatures"
+  "/etc/dotfiles/modules/eww/scripts/all-temperatures.sh")
+
+(defpoll battery :interval "5s"
+  :initial '{"charge":0,"time_remaining":"unknown","charging":false}'
+  "~/.config/eww/scripts/battery.sh")
+
+(defpoll network :interval "5s"
+  :initial '{"internet":false,"wired":false,"signal_strength":0,"wifi_name":""}'
+  "~/.config/eww/scripts/network.sh")
+
+(defpoll disk :interval "10s"
+  :initial '{"total":"0G","used":"0G","available":"0G","used_percent":0}'
+  "~/.config/eww/scripts/disk-usage.sh")
 
 (defpoll system-load :interval "10s"
-  ; system load averages and uptime
   :initial '{"load1":"0.00","load5":"0.00","load15":"0.00","uptime":"0m"}'
-  "~/.config/eww/scripts/system-load.sh")  
+  "~/.config/eww/scripts/system-load.sh")
 
 (defpoll processes :interval "10s"
-  ; process count information
   :initial '{"total":0,"running":0,"sleeping":0}'
   "~/.config/eww/scripts/processes.sh")
 
-(defpoll current-language :interval "2s"
-  ; current keyboard layout
-  :initial "US"
-  "~/.config/eww/scripts/current-language.sh")
+(defpoll current-language :interval "1s"
+  :initial "🇺🇸"
+  "/etc/dotfiles/modules/eww/scripts/current-language.sh")
 
 (deflisten workspaces
-  ; active and occupied hyprland workspaces for each monitor,
-  ; e.g. {"HDMI-A-1":{"1":true},"DP-1":{"1":true}}
   :initial '{"DP-1":{"1":true,"2":false,"3":false,"4":false,"5":false,"6":false,"7":false,"8":false,"9":false}}'
   "~/.config/eww/scripts/workspaces/get-all.sh")
 
-; Right panel like Windows taskbar
-(defwindow right-panel
-  :stacking "overlay"
+; ========================
+; WINDOW
+; ========================
+(defwindow right-panel-window
+  :stacking "bottom"
   :exclusive false
   :focusable false
   :namespace "eww-right-panel"
@@ -74,211 +83,92 @@
   :backend_options (wayland
     :exclusive false
     :namespace "eww-right-panel")
-  (right-panel)) 
+  (right-panel))
 
+; New popup window for temperatures
+(defwindow temps-popup-window
+  :stacking "fg"
+  :exclusive false
+  :focusable false
+  :namespace "eww-temps"
+  :monitor "DP-1"
+  :geometry (geometry
+              :anchor "top right"
+              :x "60px"
+              :y "160px"
+              :width "260px")
+  :backend_options (wayland
+    :exclusive false
+    :namespace "eww-temps")
+  (temps-popup))
 
-
-; monitor: name of monitor to watch workspaces, e.g. DP-1
-(defwidget workspaces [monitor]
-  (eventbox
-    ; scroll through workspaces with direction like up/down and currently active workspace on that monitor
-    :onscroll '~/.config/eww/scripts/workspaces/change-active.sh {} ${jq(workspaces[monitor], "to_entries | map(select(.value == true)) | .[0].key")}'
-    (box
-      :halign "center"
-      :style "margin-left: -1px" ; better centering below ":" of time
-      :space-evenly false
-      :spacing 38
-      ; for all workspaces per monitor
-      (for i in '[1,2,3,4,5,6,7,8,9]'
-        (eventbox
-          :onclick 'hyprctl dispatch split:workspace ${i}'
-          :tooltip {i}
-          :class "workspace"
-          (label
-            :show-truncated false
-            :style "padding-right: 0.25em"
-            :text {workspaces[monitor][i] == "true"  ? "󰟒" :
-                   workspaces[monitor][i] == "false" ? "󰝥" : "󰄰"})))))) ; nerdfont characters
-
-; Removed system-info-panel widget - no longer needed
-
-; Right panel widget - System info only
+; ========================
+; MAIN WIDGET
+; ========================
 (defwidget right-panel []
   (box
     :class "right-panel"
     :orientation "v"
     :halign "center"
     :valign "center"
-    :spacing 20
+    :spacing 25
     :style "padding: 20px 0;"
-    ; System info - centered
+    ;; --- SYSTEM INFO ---
     (box
       :class "system-info"
       :orientation "v"
       :halign "center"
       :spacing 20
-      ; Disk usage
-      (box
-        :orientation "v"
-        :halign "center"
-        :spacing 3
+
+      (box :orientation "v" :halign "center" :spacing 3
         (label :text "💾" :style "font-size: 16px;")
         (label :text {disk.used_percent} :style "font-size: 12px;"))
-      ; Temperature
-      (box
-        :orientation "v"
-        :halign "center"
-        :spacing 3
-        (label :text "🌡️" :style "font-size: 16px;")
-        (label :text {temperature.temperature} :style "font-size: 12px;"))
-      ; System load
-      (box
-        :orientation "v"
-        :halign "center"
-        :spacing 3
+
+      (eventbox :class "temperature-box"
+        :onhover "eww open temps-popup-window"
+        (box :orientation "v" :halign "center" :spacing 3
+          (label :text "🌡️" :style "font-size: 16px;")
+          (label :text {temperature.temperature} :style "font-size: 12px;")))
+
+      (box :orientation "v" :halign "center" :spacing 3
         (label :text "📊" :style "font-size: 16px;")
         (label :text {system-load.load1} :style "font-size: 12px;"))
-      ; Processes
-      (box
-        :orientation "v"
-        :halign "center"
-        :spacing 3
+
+      (box :orientation "v" :halign "center" :spacing 3
         (label :text "⚙️" :style "font-size: 16px;")
         (label :text {processes.total} :style "font-size: 12px;"))
-      ; Uptime
-      (box
-        :orientation "v"
-        :halign "center"
-        :spacing 3
+
+      (box :orientation "v" :halign "center" :spacing 3
         (label :text "⏱️" :style "font-size: 16px;")
         (label :text {system-load.uptime} :style "font-size: 12px;"))
-      ; RAM usage
-      (box
-        :orientation "v"
-        :halign "center"
-        :spacing 3
-        (label :text "💾" :style "font-size: 16px;")
+
+      (box :orientation "v" :halign "center" :spacing 3
+        (label :text "🧠" :style "font-size: 16px;")
         (label :text {ram.used_percent} :style "font-size: 12px;"))
-      ; CPU usage
-      (box
-        :orientation "v"
-        :halign "center"
-        :spacing 3
+
+      (box :orientation "v" :halign "center" :spacing 3
         (label :text "🖥️" :style "font-size: 16px;")
-        (label :text {round(logarithmic-cpu, 1)} :style "font-size: 12px;"))
-      ; Time
-      (box
-        :orientation "v"
-        :halign "center"
-        :spacing 3
+        (label :text {round(cpu-percent, 0)} :style "font-size: 12px;"))
+
+      (box :orientation "v" :halign "center" :spacing 3 :class "datetime-block"
         (label
           :show-truncated false
-          :class "time-bottom"
+          :class "time-right"
           :text {formattime(EWW_TIME, "%R")}
-          :tooltip {formattime(EWW_TIME, "%T")}))
-      ; Date
-      (box
-        :orientation "v"
-        :halign "center"
-        :spacing 3
+          :tooltip {formattime(EWW_TIME, "%T")})
         (label
           :show-truncated false
-          :class "date-bottom"
+          :class "date-right"
           :text {date.date}))
-      ; Current Language
-      (box
-        :orientation "v"
-        :halign "center"
-        :spacing 3
-        (label :text "🌐" :style "font-size: 16px;")
-        (label :text {current-language} :style "font-size: 12px;")))))
 
-(defwidget circular-cpu []
-  (circular-progress-fancy
-    :visible {!is-laptop}
-    :tooltip '${round(EWW_CPU.avg, 2)}%'
-    :value logarithmic-cpu
-    :text "" :style "padding-right: 0.35em" ; cpu nerdfont character
-    :condition       {EWW_CPU.avg < 10}
-    :condition-text '${round(EWW_CPU.avg, 1)}'))
+      (box :orientation "v" :halign "center" :spacing 3
+        (label :text {current-language} :style "font-size: 16px;")))))
 
-(defwidget circular-ram []
-  (circular-progress-fancy
-    :visible {!is-laptop}
-    :tooltip '${ram.used} / ${ram.total} MB'
-    :value {ram.used_percent}
-    :text "" :style "padding-right: 0.3em" ; memory chip nerdfont character
-    :condition      {ram.used < 1000}
-    :condition-text {ram.used}))
-
-(defwidget circular-battery []
-  (circular-progress-fancy
-    :visible {is-laptop}
-    :tooltip '${battery.charge}% (${battery.time_remaining} left${battery.charging ? " to charge" : ""})'
-    :value {battery.charge}
-    :style {battery.charging ? "padding-left: 0.1em" : ""}
-    ; a lot of battery nerdfont characters incoming
-    :text {battery.charging ? (
-      battery.charge < 10 ? "󰢟" :
-      battery.charge < 20 ? "󰢜" :
-      battery.charge < 30 ? "󰂆" :
-      battery.charge < 40 ? "󰂇" :
-      battery.charge < 50 ? "󰂈" :
-      battery.charge < 60 ? "󰢝" :
-      battery.charge < 70 ? "󰂉" :
-      battery.charge < 80 ? "󰢞" :
-      battery.charge < 90 ? "󰂊" :
-      battery.charge < 95 ? "󰂋" : "󰂅"
-    ) : (
-      battery.charge < 10 ? "󰂎" :
-      battery.charge < 20 ? "󰁺" :
-      battery.charge < 30 ? "󰁻" :
-      battery.charge < 40 ? "󰁼" :
-      battery.charge < 50 ? "󰁽" :
-      battery.charge < 60 ? "󰁾" :
-      battery.charge < 70 ? "󰁿" :
-      battery.charge < 80 ? "󰂀" :
-      battery.charge < 90 ? "󰂁" :
-      battery.charge < 95 ? "󰂂" : "󰁹" )}))
-
-(defwidget circular-network []
-  (circular-progress-fancy
-    :visible {is-laptop}
-    :tooltip {!network.internet ? "no connection" : (
-      network.wired ? "wired connection" :
-        'connected to ${network.wifi_name} (${network.signal_strength}% signal strength)')}
-    :value {network.signal_strength}
-    :style 'padding-right: 0.${network.internet && !network.wired ? 3 : 2}em'
-    ; network nerdfont characters incoming
-    :text {!network.internet ? "" : (
-      network.wired ? "󰈀" : (
-        network.signal_strength < 20 ? "󰤯" :
-        network.signal_strength < 40 ? "󰤟" :
-        network.signal_strength < 60 ? "󰤢" :
-        network.signal_strength < 80 ? "󰤥" : "󰤨" ))}))
-
-(defwidget circular-progress-fancy [value text ?tooltip ?condition ?condition-text ?style ?visible]
-  (overlay
-    :visible {visible ?: true}
-    :tooltip tooltip
-    (circular-progress
-      :class "inner-circle"
-      :value 100
-      :thickness 25)
-    (circular-progress
-      :class "outer-circle"
-      :value value
-      :start-at 75
-      :thickness 3)
-    (revealer
-      :reveal {!(condition ?: false)}
-      (label
-        :show-truncated false
-        :text text
-        :style style))
-    (revealer
-      :reveal {condition ?: false}
-      (label
-        :show-truncated false
-        :text condition-text
-        :class "circle-condition-text"))))
+; ========================
+; POPUP WIDGETS
+; ========================
+(defwidget temps-popup []
+  (eventbox :onhoverlost "eww close temps-popup-window"
+    (box :class "temps-popup" :orientation "v" :halign "fill" :valign "fill" :spacing 8
+      (scroll :hscroll false :vscroll true :height 200
+        (label :class "temps-popup-text" :wrap true :text {temperatures-detail})))))
