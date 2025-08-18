@@ -8,6 +8,7 @@
 {
   imports = [
     ./niri.nix
+    ./waybar.nix
   ];
 
   stylix = {
@@ -104,8 +105,6 @@
         bindkey "^H" backward-kill-word
         bindkey "5~" kill-word
         bindkey "^[[3~" delete-char
-
-        date
       '';
     };
 
@@ -135,11 +134,6 @@
     };
 
     swaylock.enable = true;
-
-    waybar = {
-      enable = true;
-      package = inputs.waybar.packages.${pkgs.stdenv.hostPlatform.system}.waybar;
-    };
 
     fuzzel.enable = true;
 

@@ -11,6 +11,12 @@
       prefer-no-csd = true;
       clipboard.disable-primary = true;
       hotkey-overlay.skip-at-startup = true;
+      gestures.hot-corners.enable = false;
+
+      layout = {
+        gaps = 4;
+        border.width = 2;
+      };
 
       environment.DISPLAY = ":0";
 
@@ -237,9 +243,9 @@
 
         "Mod+W".action = toggle-column-tabbed-display;
 
-        "F9".action = screenshot;
-        # "Ctrl+F9".action = screenshot-screen;
-        "Alt+F9".action = screenshot-window;
+        "Print".action = screenshot;
+        # "Ctrl+Print".action = screenshot-screen;
+        "Alt+Print".action = screenshot-window;
 
         "Mod+Escape" = {
           allow-inhibiting = false;
