@@ -24,8 +24,8 @@
       };
 
       sansSerif = {
-        package = pkgs.noto-fonts;
-        name = "Noto Sans";
+        package = pkgs.inter;
+        name = "Inter";
       };
 
       monospace = {

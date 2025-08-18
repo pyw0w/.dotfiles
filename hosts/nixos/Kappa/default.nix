@@ -230,7 +230,7 @@
         monospace = [ "Fantasque Sans Mono" ];
         serif = [ "Noto Serif" ];
         sansSerif = [
-          "Noto Sans"
+          "Inter"
           "Noto Color Emoji"
         ];
       };
