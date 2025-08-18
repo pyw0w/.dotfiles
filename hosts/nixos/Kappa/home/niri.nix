@@ -16,6 +16,7 @@
       layout = {
         gaps = 4;
         border.width = 2;
+        tab-indicator.place-within-column = true;
       };
 
       environment.DISPLAY = ":0";
