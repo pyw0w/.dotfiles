@@ -72,8 +72,7 @@
     graphics = {
       enable = true;
       extraPackages = with pkgs; [
-        intel-media-driver # LIBVA_DRIVER_NAME=iHD
-        intel-vaapi-driver # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
+        nvidia-vaapi-driver
         libvdpau-va-gl
       ];
     };
@@ -270,7 +269,6 @@
         obs-gstreamer
         waveform
         obs-pipewire-audio-capture
-        obs-vkcapture
       ];
     };
   };
@@ -305,7 +303,6 @@
       slurp
       wl-clipboard
       mako
-      nvidia-vaapi-driver
       dig
       doas-sudo-shim
 
