@@ -11,7 +11,7 @@ lib.mkModule "fabric" config {
   # symlink config to ~/.config
   home-manager.users.${variables.username} = { config, ... }: {
     xdg.configFile."fabric" = {
-      source = config.lib.file.mkOutOfStoreSymlink "/etc/dotfiles/modules/fabric";
+      source = config.lib.file.mkOutOfStoreSymlink "/etc/dotfiles/modules/fabric/config";
       recursive = true;
     };
 
