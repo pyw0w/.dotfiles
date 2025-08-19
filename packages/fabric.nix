@@ -8,8 +8,6 @@
   gobject-introspection,
   libdbusmenu-gtk3,
   gdk-pixbuf,
-  cinnamon,
-  gnome,
   pkg-config,
   wrapGAppsHook3,
 }:
@@ -37,12 +35,12 @@ python3Packages.buildPythonPackage {
     gtk3
     gtk-layer-shell
     libdbusmenu-gtk3
-    cinnamon-desktop
-    gnome-bluetooth
+    gdk-pixbuf
   ];
 
   dependencies = with python3Packages; [
     setuptools
+    wheel
     click
     pycairo
     pygobject3
