@@ -4,6 +4,7 @@
     ./base
     ./copyq
     ./eww
+    ./fabric
     ./firefox
     ./fish
     ./gitnuro

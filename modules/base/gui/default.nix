@@ -86,6 +86,7 @@ args@{ config, lib, pkgs, variables, ... }:
       hyprland.enable = true;
       copyq.enable = true;
       eww.enable = true;
+      fabric.enable = true;
       rofi.enable = true;
       sddm-sugar-candy.enable = true;
       swaylock-effects.enable = true;
