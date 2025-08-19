@@ -3,9 +3,9 @@ args@{ config, lib, pkgs, variables, ... }:
 let
   fabricEnv = pkgs.python3.withPackages (ps: [ pkgs.local.fabric ]);
   fabricRunner = pkgs.writeShellScriptBin "fabric-run" ''
-    export GI_TYPELIB_PATH=${pkgs.gtk3}/lib/girepository-1.0:${pkgs.gdk-pixbuf}/lib/girepository-1.0:${pkgs.gobject-introspection}/lib/girepository-1.0:${pkgs.libdbusmenu-gtk3}/lib/girepository-1.0:${pkgs.gtk-layer-shell}/lib/girepository-1.0:$GI_TYPELIB_PATH
+    export GI_TYPELIB_PATH=${pkgs.glib}/lib/girepository-1.0:${pkgs.gtk3}/lib/girepository-1.0:${pkgs.gdk-pixbuf}/lib/girepository-1.0:${pkgs.gobject-introspection}/lib/girepository-1.0:${pkgs.libdbusmenu-gtk3}/lib/girepository-1.0:${pkgs.gtk-layer-shell}/lib/girepository-1.0:$GI_TYPELIB_PATH
     export GSETTINGS_SCHEMA_DIR=${pkgs.gsettings-desktop-schemas}/share/glib-2.0/schemas:${pkgs.gtk3}/share/glib-2.0/schemas:$GSETTINGS_SCHEMA_DIR
-    exec ${fabricEnv}/bin/python %h/.config/fabric/main.py
+    exec ${fabricEnv}/bin/python "$HOME/.config/fabric/main.py"
   '';
 in
 lib.mkModule "fabric" config {
