@@ -65,6 +65,12 @@
             color = "#0007";
           };
         }
+        {
+          matches = [
+            { app-id = ''^org\.keepassxc\.KeePassXC$''; }
+          ];
+          block-out-from = "screen-capture";
+        }
       ];
 
       outputs = {
