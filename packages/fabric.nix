@@ -37,8 +37,8 @@ python3Packages.buildPythonPackage {
     gtk3
     gtk-layer-shell
     libdbusmenu-gtk3
-    cinnamon.cinnamon-desktop
-    gnome.gnome-bluetooth
+    cinnamon-desktop
+    gnome-bluetooth
   ];
 
   dependencies = with python3Packages; [
