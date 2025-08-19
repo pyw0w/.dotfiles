@@ -31,14 +31,14 @@ python3Packages.buildPythonPackage {
     cairo
   ];
 
-  propagatedBuildInputs = [
+  buildInputs = [
     gtk3
     gtk-layer-shell
     libdbusmenu-gtk3
     gdk-pixbuf
   ];
 
-  dependencies = with python3Packages; [
+  propagatedBuildInputs = with python3Packages; [
     setuptools
     wheel
     click
@@ -48,6 +48,8 @@ python3Packages.buildPythonPackage {
     loguru
     psutil
   ];
+
+  pythonImportsCheck = [ "fabric" ];
 
   meta = {
     changelog = "";
