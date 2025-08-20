@@ -20,8 +20,8 @@ python3Packages.buildPythonPackage {
   src = fetchFromGitHub {
     owner = "Fabric-Development";
     repo = "fabric";
-    rev = "1134b7f96ecc54d2626788ad59b4717ed86e5cf4";
-    sha256 = "sha256-t+tb+0isS/AloTd+HUkCvfpNXOl6RkkenIPxMsk++LA=";
+    rev = "0d82275169d3d6ff9cde25eac8bbd754a3dfeddf";
+    sha256 = "sha256-DcEz9zegSMIaWObOT+d8VQC2fkPyZkeiz69+QdaxwQQ=";
   };
 
   nativeBuildInputs = [
@@ -47,6 +47,8 @@ python3Packages.buildPythonPackage {
     pygobject-stubs
     loguru
     psutil
+    python-dbusmock
+    dbus-python
   ];
 
   pythonImportsCheck = [ "fabric" ];

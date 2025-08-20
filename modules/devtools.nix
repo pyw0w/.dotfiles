@@ -13,7 +13,7 @@ in
   config = {
     # python
     environment.systemPackages = lib.optionals cfg.python.enable [
-      (pkgs.python3.withPackages (p: with p; [ virtualenv ]))
+      (pkgs.python3.withPackages (p: with p; [ virtualenv pygobject-stubs pip ]))
     ];
 
     # java

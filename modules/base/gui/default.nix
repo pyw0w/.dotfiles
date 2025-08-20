@@ -83,10 +83,11 @@ args@{ config, lib, pkgs, variables, ... }:
 
     local = {
       alacritty.enable = true;
+      ashell.enable = true;
       hyprland.enable = true;
       copyq.enable = true;
-      eww.enable = true;
-      fabric.enable = true;
+      eww.enable = false;
+      fabric.enable = false;
       rofi.enable = true;
       sddm-sugar-candy.enable = true;
       swaylock-effects.enable = true;

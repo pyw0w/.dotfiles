@@ -1,6 +1,7 @@
 {
   imports = [
     ./alacritty
+    ./ashell
     ./base
     ./copyq
     ./eww
