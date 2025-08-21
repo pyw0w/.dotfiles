@@ -18,6 +18,11 @@
     image = inputs.self + /assets/wallpaper.jpg;
 
     fonts = {
+      sizes = {
+        applications = 12;
+        desktop = 12;
+      };
+
       serif = {
         package = pkgs.noto-fonts;
         name = "Noto Serif";
@@ -37,6 +42,12 @@
         package = pkgs.noto-fonts-emoji;
         name = "Noto Color Emoji";
       };
+    };
+
+    opacity = {
+      desktop = 0.8;
+      popups = 0.8;
+      terminal = 0.8;
     };
   };
 
@@ -112,7 +123,6 @@
       enable = true;
       settings = {
         main.pad = "8x8 center-when-fullscreen";
-        colors.alpha = lib.mkForce 0.8;
       };
     };
 
@@ -122,7 +132,6 @@
       extraConfig = ''
         draw_minimal_borders yes
         resize_in_steps no
-        background_opacity 0.8
         dynamic_background_opacity yes
 
         map ctrl+shift+0 set_background_opacity +0.1
@@ -232,7 +241,36 @@
         control-center-margin-right = 4;
         control-center-margin-bottom = 4;
         notification-window-width = 400;
+        widgets = [
+          "mpris"
+          "inhibitors"
+          "notifications"
+        ];
       };
+      style = ''
+        .control-center {
+          background: alpha(@base00, 0.8);
+          border: 2px solid @base0D;
+          border-radius: 12px;
+        }
+
+        .control-center .notification-row .notification-background {
+          background: transparent;
+        }
+
+        .notification {
+          border-radius: 12px;
+          margin: 0;
+        }
+
+        .widget-mpris .widget-mpris-player > box > button {
+          border: none;
+        }
+
+        .widget-mpris .widget-mpris-player > box > button:hover {
+          border: none;
+        }
+      '';
     };
   };
 
