@@ -25,6 +25,7 @@
           "wlr/taskbar"
           "wireplumber"
           "niri/language"
+          "custom/notification"
           "tray"
         ];
 
@@ -65,12 +66,33 @@
         "tray" = {
           spacing = 8;
         };
+
+        "custom/notification" = {
+          tooltip = false;
+          format = "{icon}";
+          format-icons = {
+            notification = "";
+            none = "";
+            dnd-notification = "";
+            dnd-none = "";
+            inhibited-notification = "";
+            inhibited-none = "";
+            dnd-inhibited-notification = "";
+            dnd-inhibited-none = "";
+          };
+          return-type = "json";
+          exec-if = "which swaync-client";
+          exec = "swaync-client -swb";
+          on-click = "swaync-client -t -sw";
+          on-click-right = "swaync-client -d -sw";
+          escape = true;
+        };
       };
     };
 
     style = ''
       * {
-        font-family: Inter, 'Font Awesome 6 Free';
+        font-family: Inter, 'Font Awesome 6 Free Solid';
         font-feature-settings: "tnum";
         font-size: 12pt;
         border-radius: 0;
@@ -97,7 +119,8 @@
       #clock,
       #wireplumber,
       #language,
-      #tray {
+      #tray,
+      #custom-notification {
         border-radius: 99px;
         padding: 0 8px;
       }

@@ -223,12 +223,17 @@
   };
 
   services = {
-    mako = {
-      enable = true;
-      settings.default-timeout = 5000;
-    };
-
     mpris-proxy.enable = true;
+
+    swaync = {
+      enable = true;
+      settings = {
+        control-center-margin-top = 4;
+        control-center-margin-right = 4;
+        control-center-margin-bottom = 4;
+        notification-window-width = 400;
+      };
+    };
   };
 
   xdg.mimeApps = {

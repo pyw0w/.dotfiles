@@ -302,7 +302,6 @@
       grim
       slurp
       wl-clipboard
-      mako
       dig
       doas-sudo-shim
 
@@ -319,6 +318,7 @@
       # NIXOS_OZONE_WL = "1"; # causes flickering in electron apps
       LIBVA_DRIVER_NAME = "nvidia";
       XDG_SESSION_TYPE = "wayland";
+      GDK_BACKEND = "wayland";
       GBM_BACKEND = "nvidia-drm";
       __GLX_VENDOR_LIBRARY_NAME = "nvidia";
       NVD_BACKEND = "direct";
