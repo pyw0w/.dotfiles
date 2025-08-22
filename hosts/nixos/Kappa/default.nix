@@ -10,6 +10,7 @@
 {
   imports = [
     ./hardware.nix
+    ./packages.nix
     inputs.home-manager.nixosModules.default
     {
       home-manager = {
@@ -107,7 +108,6 @@
   services = {
     xserver = {
       enable = true;
-
       videoDrivers = [ "nvidia" ];
     };
 
@@ -145,64 +145,6 @@
         extraGroups = [
           "wheel"
           "gamemode"
-        ];
-        packages = with pkgs; [
-          # Internet
-          librewolf
-          chromium
-          firefox
-          technorino
-          electrum # BTC wallet
-          # monero-gui # XMR wallet
-          qbittorrent
-          webcord-vencord
-          thunderbird
-          discord
-
-          # Utils/Misc
-          kitty # Terminal
-          foot
-          fastfetch
-          yt-dlp
-          pavucontrol # Volume control
-          keepassxc # Password manager
-          flameshot # Screenshots
-          songrec # Shazam song recognition
-          scrcpy
-          filezilla
-          curlie
-          gnupg
-          session-desktop
-          dbgate
-          libreoffice
-
-          # Dev
-          vscode
-          github-desktop
-          helix
-          insomnia
-          gh
-          lazygit
-          gcc
-          fenix.default.toolchain
-          # LSP
-          gopls
-          typescript-language-server
-          nil
-          nixfmt-rfc-style
-          php
-
-          # Multimedia
-          nsxiv # Image viewer
-          mpv
-          jellyfin-mpv-shim
-          jellyfin-rpc
-          spotify
-          audacity
-          imagemagick
-
-          # Games
-          prismlauncher # Minecraft launcher
         ];
       };
     };
@@ -274,43 +216,6 @@
   };
 
   environment = {
-    systemPackages = with pkgs; [
-      # Essential
-      vim
-      wget
-      git
-      xz
-      htop
-      bottom
-      nvitop
-      go
-      nodejs
-      zbar
-      playerctl
-      autorandr
-      scrot
-      psmisc
-      ffmpeg-full
-      compsize
-      pkg-config
-      zulu8
-      zulu17
-      ripgrep
-      config.boot.kernelPackages.cpupower
-      busybox
-      libclang
-      grim
-      slurp
-      wl-clipboard
-      dig
-      doas-sudo-shim
-
-      (pkgs.writeShellScriptBin "c2" ''
-        export QT_QPA_PLATFORM=xcb
-        exec ${lib.getExe technorino} "$@"
-      '')
-    ];
-
     sessionVariables = {
       BROWSER = "${lib.getExe pkgs.librewolf}";
       EDITOR = "${lib.getExe pkgs.helix}";
