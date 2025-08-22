@@ -26,16 +26,11 @@
     doas-sudo-shim
   ];
 
-  users.users.supa.packages = with pkgs; [
+  users.users.pyw0w.packages = with pkgs; [
     # Internet
-    librewolf
-    chromium
     firefox
-    technorino
-    electrum # BTC wallet
     # monero-gui # XMR wallet
     qbittorrent
-    webcord-vencord
     thunderbird
     discord
 
@@ -46,7 +41,6 @@
     ffmpeg-full
     yt-dlp
     pavucontrol # Volume control
-    keepassxc # Password manager
     flameshot # Screenshots
     songrec # Shazam song recognition
     filezilla
@@ -61,8 +55,7 @@
     zulu17
 
     # Dev
-    vscode
-    github-desktop
+    code-cursor
     helix
     insomnia
     gh
@@ -82,7 +75,6 @@
     mpv
     jellyfin-mpv-shim
     jellyfin-rpc
-    spotify
     audacity
     imagemagick
 

@@ -25,7 +25,7 @@
       settings = {
         default_session = {
           command = ''${lib.getExe pkgs.greetd.tuigreet} --time --cmd niri-session'';
-          user = "supa";
+          user = "pyw0w";
         };
       };
     };

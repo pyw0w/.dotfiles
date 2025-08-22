@@ -60,8 +60,8 @@
   };
 
   home = {
-    username = "supa";
-    homeDirectory = "/home/supa";
+    username = "pyw0w";
+    homeDirectory = "/home/pyw0w";
 
     stateVersion = "23.11"; # do not change
 

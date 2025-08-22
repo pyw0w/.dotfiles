@@ -13,14 +13,15 @@
     ./packages.nix
     ./services.nix
     ./programs.nix
+    ./nh.nix
     inputs.home-manager.nixosModules.default
     {
       home-manager = {
         useGlobalPkgs = true;
         useUserPackages = true;
-        backupFileExtension = "hm-bkp-${builtins.toString builtins.currentTime}";
+        backupFileExtension = "hm-bkp";
 
-        users.supa = {
+        users.pyw0w = {
           _module.args = { inherit inputs; };
           imports = [
             ./home
@@ -56,18 +57,18 @@
     memoryPercent = 100;
   };
 
-  time.timeZone = "Europe/Bucharest";
+  time.timeZone = "Asia/Yekaterinburg";
 
   i18n = {
     supportedLocales = [
       "en_US.UTF-8/UTF-8"
-      "ro_RO.UTF-8/UTF-8"
+      "ru_RU.UTF-8/UTF-8"
     ];
 
     defaultLocale = "en_US.UTF-8";
 
     extraLocaleSettings = {
-      LC_TIME = "ro_RO.UTF-8";
+      LC_TIME = "ru_RU.UTF-8";
     };
   };
 
@@ -111,9 +112,9 @@
     defaultUserShell = pkgs.zsh;
 
     users = {
-      supa = {
+      pyw0w = {
         isNormalUser = true;
-        description = "Supa";
+        description = "PyW0W";
         extraGroups = [
           "wheel"
           "gamemode"
