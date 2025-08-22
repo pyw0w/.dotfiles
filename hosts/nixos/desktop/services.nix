@@ -1,36 +1,21 @@
 {
-  lib,
-  pkgs,
   ...
 }:
 {
-  services = {
-    xserver = {
-      enable = true;
-      videoDrivers = [ "nvidia" ];
-    };
+  imports = [
+    # Display services
+    ./services/display
 
-    pipewire = {
-      enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
-      pulse.enable = true;
-      jack.enable = true;
-    };
+    # Audio services  
+    ./services/audio
 
-    gnome.gnome-keyring.enable = true;
+    # Authentication services
+    ./services/auth
 
-    greetd = {
-      enable = true;
-      settings = {
-        default_session = {
-          command = ''${lib.getExe pkgs.greetd.tuigreet} --time --cmd niri-session'';
-          user = "pyw0w";
-        };
-      };
-    };
+    # Desktop manager services
+    ./services/desktop-manager
 
-    gvfs.enable = true;
-    blueman.enable = true;
-  };
+    # Hardware services
+    ./services/hardware
+  ];
 }
