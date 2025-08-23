@@ -1,3 +1,5 @@
+# Custom Technorino overlay
+# A modified version of Chatterino with additional features
 final: prev: {
   technorino = prev.chatterino7.overrideAttrs (oldAttrs: {
     pname = "technorino";
@@ -9,6 +11,7 @@ final: prev: {
         kdePackages.qtimageformats
         libnotify
       ]);
+    
     src = final.chatterino7.src.override {
       owner = "2547techno";
       repo = "technorino";
@@ -17,4 +20,4 @@ final: prev: {
       hash = "sha256-pG96nAyjEtfeOCkhG5rTs1g3Vq4lXHpLSDq0Tr196wQ=";
     };
   });
-}
+} 

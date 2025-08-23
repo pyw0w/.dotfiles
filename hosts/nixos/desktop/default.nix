@@ -11,9 +11,8 @@
   imports = [
     ./hardware.nix
     ./packages
-    ./services.nix
-    ./programs.nix
-    ./nh.nix
+    ./services
+    ./programs
     inputs.home-manager.nixosModules.default
     {
       home-manager = {

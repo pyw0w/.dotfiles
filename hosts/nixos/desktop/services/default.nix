@@ -4,18 +4,18 @@
 {
   imports = [
     # Display services
-    ./services/display
+    ./display
 
     # Audio services  
-    ./services/audio
+    ./audio
 
     # Authentication services
-    ./services/auth
+    ./auth
 
     # Desktop manager services
-    ./services/desktop-manager
+    ./desktop-manager
 
     # Hardware services
-    ./services/hardware
+    ./hardware
   ];
 }
