@@ -21,6 +21,13 @@
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
+  # Steam games disk - DEXP SSD C100 1TB
+  fileSystems."/mnt/games" =
+    { device = "/dev/disk/by-uuid/bb4a4238-79e8-4c20-a599-82327da76aab";
+      fsType = "btrfs";
+      options = [ "defaults" "noatime" "compress=zstd" ];
+    };
+
   swapDevices =
     [ { device = "/dev/disk/by-uuid/4818894f-1557-4be9-a59a-a3352416e544"; } ];
 
