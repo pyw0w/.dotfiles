@@ -1,4 +1,5 @@
 {
+  lib,
   pkgs,
   ...
 }:
@@ -126,6 +127,34 @@
           ];
         };
       };
+    };
+  };
+
+  # Configure dconf settings for Nautilus
+  dconf.settings = {
+    "org/gnome/nautilus/preferences" = {
+      default-folder-viewer = "list-view";  # Use list view by default
+      show-hidden-files = false;
+      show-size-column = true;
+      show-type-column = true;
+      show-date-column = true;
+      executable-text-activation = "ask";   # Ask what to do with executable files
+      show-directory-item-counts = "always";
+    };
+    
+    "org/gnome/nautilus/list-view" = {
+      default-zoom-level = "small";         # Compact list view
+      use-tree-view = false;
+    };
+    
+    "org/gnome/nautilus/icon-view" = {
+      default-zoom-level = "small";
+    };
+
+    # Desktop integration
+    "org/gnome/desktop/interface" = {
+      show-battery-percentage = true;
+      #color-scheme = lib.mkForce "prefer-dark";  # Force dark theme for Nautilus
     };
   };
 

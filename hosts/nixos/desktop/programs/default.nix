@@ -5,9 +5,8 @@
   imports = [
     ./niri
     ./steam
-    ./thunar
+    ./nautilus
     ./obs-studio
-    ./file-roller
     ./zsh
     ./nh
   ];

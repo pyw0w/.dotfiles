@@ -5,7 +5,7 @@
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
-      "inode/directory" = "thunar.desktop";
+      "inode/directory" = "org.gnome.Nautilus.desktop";
 
       "applications/x-www-browser" = "librewolf.desktop";
       "x-scheme-handler/http" = "librewolf.desktop";
