@@ -7,8 +7,6 @@
     # Multimedia
     nsxiv # Image viewer
     mpv
-    jellyfin-mpv-shim
-    jellyfin-rpc
     audacity
     imagemagick
   ];

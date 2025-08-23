@@ -10,7 +10,7 @@
 {
   imports = [
     ./hardware.nix
-    ./packages.nix
+    ./packages
     ./services.nix
     ./programs.nix
     ./nh.nix
