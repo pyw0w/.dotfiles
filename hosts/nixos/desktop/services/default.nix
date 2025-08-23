@@ -3,9 +3,6 @@
 }:
 {
   imports = [
-    # Display services
-    ./display
-
     # Audio services  
     ./audio
 
@@ -15,7 +12,7 @@
     # Desktop manager services
     ./desktop-manager
 
-    # Hardware services
+    # Hardware services (includes NVIDIA configuration)
     ./hardware
   ];
 }

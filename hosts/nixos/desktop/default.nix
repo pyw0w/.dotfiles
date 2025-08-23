@@ -43,7 +43,7 @@
       efi.canTouchEfiVariables = true;
     };
     kernel.sysctl = {
-      "vm.swappiness" = 1;
+      # Gaming-specific sysctls moved to gaming-optimizations.nix
     };
     tmp = {
       useTmpfs = true;
@@ -72,22 +72,6 @@
   };
 
   hardware = {
-    graphics = {
-      enable = true;
-      extraPackages = with pkgs; [
-        nvidia-vaapi-driver
-        libvdpau-va-gl
-      ];
-    };
-
-    nvidia = {
-      modesetting.enable = true;
-      powerManagement.enable = false;
-      powerManagement.finegrained = false;
-      open = false;
-      nvidiaSettings = true;
-    };
-
     bluetooth.enable = true;
     bluetooth.powerOnBoot = true;
   };
@@ -157,11 +141,8 @@
       EDITOR = "${lib.getExe pkgs.helix}";
 
       # NIXOS_OZONE_WL = "1"; # causes flickering in electron apps
-      LIBVA_DRIVER_NAME = "nvidia";
       XDG_SESSION_TYPE = "wayland";
       GDK_BACKEND = "wayland";
-      GBM_BACKEND = "nvidia-drm";
-      __GLX_VENDOR_LIBRARY_NAME = "nvidia";
       NVD_BACKEND = "direct";
     };
   };
