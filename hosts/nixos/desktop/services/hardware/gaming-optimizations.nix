@@ -16,32 +16,12 @@
     "net.ipv4.tcp_wmem" = "4096 65536 16777216";
     "net.core.netdev_max_backlog" = 5000;
     
-    # Memory management for gaming
-    "vm.swappiness" = 1;
+    # Memory management optimized for ZRAM-only setup
+    "vm.swappiness" = 180;  # Higher value for ZRAM (compressed memory)
     "vm.vfs_cache_pressure" = 50;
     "vm.dirty_background_ratio" = 5;
     "vm.dirty_ratio" = 10;
-  };
-
-  # Gaming-specific environment variables
-  environment.sessionVariables = {
-    # Wine/Proton optimizations
-    WINEFSYNC = "1";
-    WINEESYNC = "1";
-    WINE_CPU_TOPOLOGY = "4:2";  # Adjust based on your CPU
-    
-    # Gaming performance
-    __GL_SYNC_TO_VBLANK = "0";  # Disable VSync for lower input lag
-    __GL_ALLOW_UNOFFICIAL_PROTOCOL = "1";
-    
-    # Steam optimizations
-    STEAM_FRAME_FORCE_CLOSE = "1";
-    RADV_PERFTEST = "gpl";  # For AMD users, but doesn't hurt NVIDIA
-    
-    # DXVK optimizations
-    DXVK_HUD = "fps,memory,gpuload";
-    DXVK_LOG_LEVEL = "warn";
-    DXVK_STATE_CACHE_PATH = "/mnt/games/SteamLibrary/dxvk_cache";
+    "vm.page-cluster" = 0;  # Disable swap readahead for ZRAM
   };
 
   # Install gaming-related packages

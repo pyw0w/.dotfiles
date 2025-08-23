@@ -11,7 +11,7 @@
     videoDrivers = [ "nvidia" ];
   };
 
-  # NVIDIA configuration optimized for gaming
+  # NVIDIA configuration optimized for gaming and Wayland
   hardware.nvidia = {
     # Modesetting is required for Wayland compositors
     modesetting.enable = true;
@@ -19,10 +19,10 @@
     # Enable NVIDIA Settings menu
     nvidiaSettings = true;
 
-    # Power management settings
+    # Power management settings - disabled for stability with Wayland
     powerManagement = {
-      enable = true;  # Enable power management for better performance
-      finegrained = false;  # Disable fine-grained power management (can cause issues)
+      enable = false;  # Disable to prevent EGL crashes with Xwayland
+      finegrained = false;
     };
 
     # Use proprietary drivers (better performance than open-source)
@@ -31,8 +31,8 @@
     # Use production drivers (stable)
     package = config.boot.kernelPackages.nvidiaPackages.production;
 
-    # Force full composition pipeline (reduces tearing)
-    forceFullCompositionPipeline = true;
+    # Disable force full composition pipeline for Wayland compatibility
+    # forceFullCompositionPipeline = false;  # This setting can cause issues with Wayland
   };
 
   # Graphics configuration
@@ -64,27 +64,6 @@
     ];
   };
 
-  # Gaming-optimized environment variables
-  environment.sessionVariables = {
-    # NVIDIA-specific variables
-    LIBVA_DRIVER_NAME = "nvidia";
-    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-    GBM_BACKEND = "nvidia-drm";
-    __GL_GSYNC_ALLOWED = "1";
-    __GL_VRR_ALLOWED = "1";
-    
-    # Vulkan
-    VK_DRIVER_FILES = "/run/opengl-driver/share/vulkan/icd.d/nvidia_icd.x86_64.json";
-    
-    # CUDA
-    CUDA_CACHE_PATH = "/tmp/cuda-cache";
-    
-    # Performance optimizations
-    __GL_SHADER_DISK_CACHE = "1";
-    __GL_SHADER_DISK_CACHE_SKIP_CLEANUP = "1";
-    __GL_THREADED_OPTIMIZATIONS = "1";
-  };
-
   # Boot parameters for NVIDIA
   boot = {
     kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
@@ -98,11 +77,11 @@
     initrd.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
   };
 
-  # Additional gaming optimizations
-  systemd.services.nvidia-powerd = {
-    enable = true;
-    description = "NVIDIA Power Management Daemon";
-  };
+  # Additional gaming optimizations - disabled for Wayland stability
+  # systemd.services.nvidia-powerd = {
+  #   enable = false;  # Disabled - can cause EGL/X11 crashes
+  #   description = "NVIDIA Power Management Daemon";
+  # };
 
   # OpenGL configuration for better performance
   hardware.nvidia.prime = {

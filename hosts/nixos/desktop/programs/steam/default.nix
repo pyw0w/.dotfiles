@@ -27,11 +27,6 @@
     "L+ /home/pyw0w/Games - - - - /mnt/games"
   ];
 
-  # Environment variables for Steam to use the new games directory
-  environment.sessionVariables = {
-    STEAM_EXTRA_COMPAT_TOOLS_PATHS = "/mnt/games/SteamLibrary/compatibilitytools.d";
-  };
-
   # Ensure Steam can write to the new library directory
   systemd.services.steam-library-setup = {
     description = "Setup Steam Library permissions and config";

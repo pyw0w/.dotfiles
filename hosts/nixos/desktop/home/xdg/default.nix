@@ -35,7 +35,27 @@
       "image/apng" = "nsxiv.desktop";
       "image/svg+xml" = "nsxiv.desktop";
 
-      "video/*" = "mpv.desktop";
+      # Video files - VLC as primary, mpv as alternative
+      "video/*" = "vlc.desktop";
+      "video/mp4" = "vlc.desktop";
+      "video/avi" = "vlc.desktop";
+      "video/mkv" = "vlc.desktop";
+      "video/mov" = "vlc.desktop";
+      "video/wmv" = "vlc.desktop";
+      "video/flv" = "vlc.desktop";
+      "video/webm" = "vlc.desktop";
+      "video/x-msvideo" = "vlc.desktop";
+      "video/quicktime" = "vlc.desktop";
+      "video/x-matroska" = "vlc.desktop";
+      
+      # Audio files - VLC as primary
+      "audio/*" = "vlc.desktop";
+      "audio/mpeg" = "vlc.desktop";
+      "audio/mp3" = "vlc.desktop";
+      "audio/wav" = "vlc.desktop";
+      "audio/flac" = "vlc.desktop";
+      "audio/ogg" = "vlc.desktop";
+      "audio/aac" = "vlc.desktop";
     };
   };
 } 

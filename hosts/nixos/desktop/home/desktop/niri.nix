@@ -19,8 +19,6 @@
         tab-indicator.place-within-column = true;
       };
 
-      environment.DISPLAY = ":0";
-
       spawn-at-startup = [
         { command = [ "${lib.getExe pkgs.xwayland-satellite-unstable}" ]; }
         {

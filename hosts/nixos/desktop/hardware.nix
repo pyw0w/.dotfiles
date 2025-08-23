@@ -28,8 +28,8 @@
       options = [ "defaults" "noatime" "compress=zstd" ];
     };
 
-  swapDevices =
-    [ { device = "/dev/disk/by-uuid/4818894f-1557-4be9-a59a-a3352416e544"; } ];
+  # Swap disabled - using only zramSwap configured in default.nix
+  swapDevices = [ ];
 
   networking.useDHCP = lib.mkDefault true;
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";

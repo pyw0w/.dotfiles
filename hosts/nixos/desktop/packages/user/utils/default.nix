@@ -23,5 +23,8 @@
     libreoffice
     zulu8
     zulu17
+    
+    # Wayland/X11 integration
+    xwayland-satellite-unstable # For X11 apps integration with niri
   ];
 } 

@@ -9,6 +9,9 @@
     # monero-gui # XMR wallet
     qbittorrent
     thunderbird
-    discord
+    
+    # Discord alternative with better performance and plugins
+    equibop  # Modern Discord client with Equicord plugins built-in
+    #discord  # Replaced with equibop - uncomment if needed
   ];
 } 
