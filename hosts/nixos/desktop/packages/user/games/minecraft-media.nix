@@ -24,10 +24,4 @@
     # GLFW for window management
     glfw
   ];
-  
-  # System-wide packages for media support
-  environment.systemPackages = with pkgs; [
-    # VLC Java bindings (if available)
-    # vlcj # This might not be available in nixpkgs
-  ];
 } 

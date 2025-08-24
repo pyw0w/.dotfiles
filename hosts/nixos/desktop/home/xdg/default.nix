@@ -21,10 +21,10 @@
       "application/x-extension-xht" = "librewolf.desktop";
       "application/pdf" = "librewolf.desktop";
 
-      "text/html" = "codium.desktop";
-      "text/plain" = "codium.desktop";
-      "application/octet-stream" = "codium.desktop";
-      "application/x-zerosize" = "codium.desktop";
+      "text/html" = "cursor.desktop";
+      "text/plain" = "cursor.desktop";
+      "application/octet-stream" = "cursor.desktop";
+      "application/x-zerosize" = "cursor.desktop";
 
       "image/png" = "nsxiv.desktop";
       "image/jpg" = "nsxiv.desktop";
