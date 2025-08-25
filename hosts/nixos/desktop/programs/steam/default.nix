@@ -25,6 +25,10 @@
     "d /mnt/games/SteamLibrary/compatibilitytools.d 0755 pyw0w users - -"
     # Create symlink from home directory to games directory
     "L+ /home/pyw0w/Games - - - - /mnt/games"
+    
+    # Steam cache optimizations - move cache to faster storage
+    "d /home/pyw0w/.cache/steam 0755 pyw0w users - -"
+    "L+ /home/pyw0w/.steam/steam/config/htmlcache - - - - /home/pyw0w/.cache/steam"
   ];
 
   # Ensure Steam can write to the new library directory

@@ -40,9 +40,7 @@
     vulkan-validation-layers
     
     # Additional gaming utilities
-    steamtinkerlaunch  # Steam game launcher with tweaks
     lutris            # Game launcher for non-Steam games
-    bottles           # Wine prefix manager
     
     # System monitoring
     htop

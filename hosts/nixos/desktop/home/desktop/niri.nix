@@ -76,16 +76,10 @@
           mode = {
             width = 1920;
             height = 1080;
-            refresh = 144.001;
+            refresh = 180.0;
           };
           position = {
             x = 1920;
-            y = 0;
-          };
-        };
-        "HDMI-A-1" = {
-          position = {
-            x = 0;
             y = 0;
           };
         };
@@ -93,7 +87,11 @@
 
       input = {
         mod-key = "Win";
-        mouse.accel-profile = "flat";
+        mouse = {
+          accel-profile = "flat";
+          accel-speed = 0.0;
+          natural-scroll = false;
+        };
         workspace-auto-back-and-forth = true;
         keyboard.xkb = {
           layout = "us,ru";
