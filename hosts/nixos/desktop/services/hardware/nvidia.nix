@@ -110,11 +110,10 @@
   services.udev.extraRules = ''
     # NVIDIA device rules for proper device creation
     KERNEL=="nvidia", RUN+="${pkgs.coreutils}/bin/mknod -m 666 /dev/nvidiactl c 195 255"
-    KERNEL=="nvidia[0-9]*", RUN+="${pkgs.bash}/bin/bash -c 'for i in 0 1 2 3; do [ -e /proc/driver/nvidia/gpus/0000:01:00.0/information ] && mknod -m 666 /dev/nvidia$i c 195 $i 2>/dev/null || true; done'"
+    KERNEL=="nvidia[0-9]*", RUN+="${pkgs.coreutils}/bin/mknod -m 666 /dev/%k c 195 %n"
     
-    # Create nvidia-uvm devices with proper error handling
-    KERNEL=="nvidia_uvm", RUN+="${pkgs.bash}/bin/bash -c 'mknod -m 666 /dev/nvidia-uvm c $(grep nvidia-uvm /proc/devices | cut -d \  -f 1) 0 2>/dev/null || true'"
-    KERNEL=="nvidia_uvm", RUN+="${pkgs.bash}/bin/bash -c 'mknod -m 666 /dev/nvidia-uvm-tools c $(grep nvidia-uvm /proc/devices | cut -d \  -f 1) 1 2>/dev/null || true'"
+    # Create nvidia-uvm devices (simplified)
+    KERNEL=="nvidia_uvm", RUN+="${pkgs.coreutils}/bin/mknod -m 666 /dev/nvidia-uvm c 510 0"
   '';
 
   # Additional NVIDIA stability improvements
