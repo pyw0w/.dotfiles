@@ -7,6 +7,9 @@ position = "Top"
 app_launcher_cmd = "rofi -show drun"
 clipboard_cmd = "copyq menu | wl-copy"
 
+[services.brightness]
+enabled = false
+
 [modules]
 left = [ [ "appLauncher", "Workspaces" ] ]
 center = [ "WindowTitle" ]

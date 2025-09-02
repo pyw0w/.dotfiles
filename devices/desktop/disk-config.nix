@@ -1,15 +1,12 @@
-# disk config using disko
-# https://github.com/nix-community/disko
 {
   disko.devices.disk = {
-    # operating system disk
-    nixos = {
+    # ОС-диск
+    system = {
       type = "disk";
-      device = "/dev/nvme1n1"; # newer ssd
+      device = "/dev/nvme0n1";
       content = {
         type = "gpt";
         partitions = {
-          # efi system partition
           esp = {
             type = "EF00";
             size = "1G";
@@ -19,13 +16,13 @@
               mountpoint = "/boot";
             };
           };
-          main = {
+          root = {
             size = "100%";
             content = {
               type = "btrfs";
-              extraArgs = [ "-f" ]; # override existing partition
+              extraArgs = [ "-f" ];
               subvolumes = {
-                "/main" = {
+                "/root" = {
                   mountpoint = "/";
                   swap.".swapfile".size = "8G";
                 };
@@ -34,11 +31,116 @@
                 };
                 "/nix" = {
                   mountpoint = "/nix";
-                  # don't save last access time
                   mountOptions = [ "noatime" ];
                 };
               };
             };
+          };
+        };
+      };
+    };
+
+    # NVMe-диск для данных (Ollama/Modules)
+    ollama = {
+      type = "disk";
+      device = "/dev/nvme1n1";
+      content = {
+        type = "gpt";
+        partitions = {
+          data = {
+            size = "100%";
+            content = {
+              type = "filesystem";
+              format = "ext4";
+              mountpoint = "/data/ollama";
+            };
+          };
+        };
+      };
+    };
+
+    # Диск для игр
+    games = {
+      type = "disk";
+      device = "/dev/sdd";
+      content = {
+        type = "gpt";
+        partitions = {
+          steam = {
+            size = "100%";
+            content = {
+              type = "filesystem";
+              format = "ext4";
+              mountpoint = "/games";
+            };
+          };
+        };
+      };
+    };
+
+    # Бэкапы: объединённые диски (LVM Volume Group)
+    backup1 = {
+      type = "disk";
+      device = "/dev/sda";
+      content = {
+        type = "gpt";
+        partitions = {
+          part = {
+            size = "100%";
+            content = {
+              type = "lvm_pv";
+              vg = "backupvg";
+            };
+          };
+        };
+      };
+    };
+
+    backup2 = {
+      type = "disk";
+      device = "/dev/sdb";
+      content = {
+        type = "gpt";
+        partitions = {
+          part = {
+            size = "100%";
+            content = {
+              type = "lvm_pv";
+              vg = "backupvg";
+            };
+          };
+        };
+      };
+    };
+
+    backup3 = {
+      type = "disk";
+      device = "/dev/sdc";
+      content = {
+        type = "gpt";
+        partitions = {
+          part = {
+            size = "100%";
+            content = {
+              type = "lvm_pv";
+              vg = "backupvg";
+            };
+          };
+        };
+      };
+    };
+  };
+
+  disko.devices.lvm_vg = {
+    backupvg = {
+      type = "lvm_vg";
+      lvs = {
+        data = {
+          size = "100%FREE";
+          content = {
+            type = "filesystem";
+            format = "ext4";
+            mountpoint = "/backup";
           };
         };
       };
