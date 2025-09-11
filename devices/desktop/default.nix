@@ -8,13 +8,15 @@ args@{ config, pkgs, variables, lib, ... }:
     piper.enable = true;
     playerctl.enable = true;
     develnext.enable = true;
+    intellij.enable = true;
+    n8n.enable = true;
   };
 
   environment.systemPackages = with pkgs; [
     zenity # password prompt
     cryptsetup # unlock luks
     dunst # send notifications
-    
+
     # Russian language support
     hunspell
     hunspellDicts.ru-ru
@@ -29,7 +31,7 @@ args@{ config, pkgs, variables, lib, ... }:
   home-manager.users.${variables.username} = { config, ... }: {
     home.file."Library".source = config.lib.file.mkOutOfStoreSymlink "/mnt/data/Library";
   };
-  
+
   # mouse sens config
   services.libinput.mouse.accelSpeed = "-0.7";
 

@@ -79,6 +79,7 @@ args@{ lib, pkgs, variables, device, ... }:
       "users"
       "wheel"
       "networkmanager"
+      "docker"
     ];
   };
 
@@ -107,6 +108,10 @@ args@{ lib, pkgs, variables, device, ... }:
     starship.enable = true;
     fastfetch.enable = true;
     devtools.python.enable = true;
+    devtools.proton.enable = true;
+    devtools.ollama.enable = true;
+    devtools.nodejs.enable = true;
+    devtools.docker.enable = true;
   };
 
   # load dev environment from directory
@@ -141,10 +146,12 @@ args@{ lib, pkgs, variables, device, ... }:
 
   # disable hibernation
   systemd.sleep.extraConfig = ''
+    AllowSuspend=no
     AllowHibernation=no
     AllowHybridSleep=no
-    AllowSuspendThenHibernate=no
-  '';
+    HandleLidSwitch=ignore
+    HandleLidSwitchDocked=ignore
+'';
 
   # for git authentication with ssh keys
   programs.ssh = {

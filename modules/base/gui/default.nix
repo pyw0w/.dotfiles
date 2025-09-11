@@ -13,8 +13,32 @@ args@{ config, lib, pkgs, variables, ... }:
 
     # hardware accelerated graphics drivers
     hardware.graphics = {
-      enable      = true;
-      enable32Bit = true;
+      enable = true;
+      enable32Bit = true; # replaces driSupport32Bit
+      extraPackages = with pkgs; [
+        vulkan-loader
+        vulkan-tools
+        vulkan-validation-layers
+
+        vkd3d-proton
+        dxvk
+
+        glxinfo
+
+        mesa
+        libGL
+      ];
+      extraPackages32 = with pkgs; [
+
+        pkgsi686Linux.vkd3d-proton
+        pkgsi686Linux.dxvk
+
+        pkgsi686Linux.vulkan-loader
+        pkgsi686Linux.vulkan-validation-layers
+
+        pkgsi686Linux.mesa
+        pkgsi686Linux.libGL
+      ];
     };
 
     # sound with pipewire
@@ -71,7 +95,7 @@ args@{ config, lib, pkgs, variables, ... }:
       nwg-look # manage gtk theming stuff if homemanager fails
       hyprpicker # color picker
       wev ydotool # find out / send keycodes
-      wl-clipboard # interact with clipboard 
+      wl-clipboard # interact with clipboard
       swayosd # osd for volume changes
     ];
 
@@ -98,8 +122,10 @@ args@{ config, lib, pkgs, variables, ... }:
       bluetooth.enable = true;
       discord.enable = true;
       cursor.enable = true;
+      zed.enable = true;
     };
 
+    services.xserver.enable = true;
     services.displayManager.sddm.enable = true;
     services.displayManager.sddm.wayland.enable = true;
 
@@ -185,7 +211,7 @@ args@{ config, lib, pkgs, variables, ... }:
             showHelp = false;
             startupLaunch = false;
             disabledTrayIcon = true;
-            disabledGrimWarning = true; 
+            disabledGrimWarning = true;
             showDesktopNotification = false;
         };
       };

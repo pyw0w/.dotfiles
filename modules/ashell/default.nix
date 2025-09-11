@@ -21,7 +21,7 @@ lib.mkModule "ashell" config {
         ExecStart = "${pkgs.unstable.ashell}/bin/ashell --config-path %h/.config/ashell/config.toml";
         Restart = "on-failure";
         RestartSec = 2;
-        Environment = [ "WGPU_BACKEND=gl" ];
+        Environment = [ "DBUS_SYSTEM_BUS_ADDRESS=unix:path=/run/dbus/system_bus_socket" ];
       };
       Install = {
         WantedBy = [ "graphical-session.target" ];

@@ -28,6 +28,9 @@
     ./playerctl.nix
     ./steam.nix
     ./cursor.nix
+    ./zed.nix
     ./develnext.nix
+    ./intellij.nix
+    ./n8n.nix
   ];
 }

@@ -52,7 +52,7 @@
             content = {
               type = "filesystem";
               format = "ext4";
-              mountpoint = "/data/ollama";
+              mountpoint = "/data/docker";
             };
           };
         };
