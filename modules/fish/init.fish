@@ -150,3 +150,10 @@ function flake-rebuild-suspend
     flake-rebuild $argv
     return $status
 end
+
+# micromamba
+if status is-interactive
+  if type -q micromamba
+    micromamba shell hook -s fish --no-stack | source
+  end
+end

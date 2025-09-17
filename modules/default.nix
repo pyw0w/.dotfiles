@@ -23,7 +23,6 @@
     ./fastfetch.nix
     ./nautilus.nix
     ./nvidia.nix
-    ./onedrive.nix
     ./piper.nix
     ./playerctl.nix
     ./steam.nix
@@ -32,5 +31,6 @@
     ./develnext.nix
     ./intellij.nix
     ./n8n.nix
+    ./zerotier.nix
   ];
 }

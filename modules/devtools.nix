@@ -32,7 +32,8 @@ in
           (pkgs.ollama.override {
             acceleration = "cuda";
           })
-        ];
+        ]
+        ++ [ pkgs.micromamba ];
 
     # java
     programs.java = lib.mkIf cfg.java.enable {
@@ -61,6 +62,6 @@ in
     };
 
 
-    services.open-webui.enable = true;
+    services.open-webui.enable = false;
   };
 }

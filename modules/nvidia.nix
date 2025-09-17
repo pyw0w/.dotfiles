@@ -32,5 +32,6 @@ lib.mkModule "nvidia" config {
   environment.systemPackages = with pkgs; [
     egl-wayland # recommended by https://wiki.hyprland.org/Nvidia/
     nvidia-system-monitor-qt # monitor nvidia gpu stuff
+    cudaPackages.cudatoolkit
   ];
 }

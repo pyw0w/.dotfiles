@@ -67,9 +67,10 @@ args@{ config, lib, pkgs, variables, ... }:
       gparted # partition manager, use with sudo -E gparted
       resources # system monitor (best overall)
       vlc # video player
+      transmission_4-gtk # torrent client
       qview # image viewer
       networkmanagerapplet # tray icon for networking connection
-      xarchiver # archive manager
+      file-roller # archive manager
       baobab # disk usage analyzer
       gnome-disk-utility
       # gtk theme
@@ -86,9 +87,9 @@ args@{ config, lib, pkgs, variables, ... }:
       lxde.lxsession # just needed for lxpolkit (an authentication agent)
 
       ### only used on xorg
-      lxappearance # manage gtk theming stuff if homemanager fails
-      unclutter-xfixes # hide mouse on inactivity
-      pick-colour-picker
+      #lxappearance # manage gtk theming stuff if homemanager fails
+      #unclutter-xfixes # hide mouse on inactivity
+      #pick-colour-picker
 
       ### only used on wayland
       swww # wallpaper switching with animations
@@ -109,7 +110,7 @@ args@{ config, lib, pkgs, variables, ... }:
       alacritty.enable = true;
       ashell.enable = true;
       hyprland.enable = true;
-      copyq.enable = true;
+      copyq.enable = false;
       eww.enable = false;
       fabric.enable = false;
       rofi.enable = true;
@@ -117,7 +118,7 @@ args@{ config, lib, pkgs, variables, ... }:
       swaylock-effects.enable = true;
       swaync.enable = true;
       zen-browser.enable = true;
-      gitnuro.enable = true;
+      gitnuro.enable = false;
       nautilus.enable = true;
       bluetooth.enable = true;
       discord.enable = true;

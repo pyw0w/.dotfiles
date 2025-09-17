@@ -108,10 +108,10 @@ args@{ lib, pkgs, variables, device, ... }:
     starship.enable = true;
     fastfetch.enable = true;
     devtools.python.enable = true;
-    devtools.proton.enable = true;
+    devtools.proton.enable = false;
     devtools.ollama.enable = true;
-    devtools.nodejs.enable = true;
-    devtools.docker.enable = true;
+    devtools.nodejs.enable = false;
+    devtools.docker.enable = false;
   };
 
   # load dev environment from directory

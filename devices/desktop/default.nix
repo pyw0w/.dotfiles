@@ -1,20 +1,18 @@
 args@{ config, pkgs, variables, lib, ... }:
 {
-  imports = [ ../../modules/studies ];
-
   local = {
     base.gui.full.enable = true;
     nvidia.enable = true;
     piper.enable = true;
     playerctl.enable = true;
-    develnext.enable = true;
+    develnext.enable = false;
     intellij.enable = true;
-    n8n.enable = true;
+    n8n.enable = false;
   };
 
   environment.systemPackages = with pkgs; [
     zenity # password prompt
-    cryptsetup # unlock luks
+    #cryptsetup # unlock luks
     dunst # send notifications
 
     # Russian language support

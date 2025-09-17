@@ -15,10 +15,9 @@ args@{ config, lib, pkgs, ... }:
       onlyoffice-bin_latest # office suite
       veracrypt # disk encryption
       freefilesync # file backup
-      (prismlauncher.override { jdks = [ jdk17 jdk8 jdk ]; }) # minecraft
-      zulu8
+      (prismlauncher.override { jdks = [ zulu21 zulu17 zulu11 zulu8  ]; }) # minecraft
       #bottles # run windows software easily
-      #usbimager # create bootable usb stick
+      usbimager # create bootable usb stick
       #obs-studio # video recording
 
       ### cli
