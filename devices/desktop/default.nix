@@ -8,6 +8,7 @@ args@{ config, pkgs, variables, lib, ... }:
     develnext.enable = false;
     intellij.enable = true;
     n8n.enable = false;
+    "7d2d".enable = true;
   };
 
   environment.systemPackages = with pkgs; [

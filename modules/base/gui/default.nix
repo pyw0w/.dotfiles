@@ -67,6 +67,7 @@ args@{ config, lib, pkgs, variables, ... }:
       gparted # partition manager, use with sudo -E gparted
       resources # system monitor (best overall)
       vlc # video player
+      telegram-desktop # messenger
       transmission_4-gtk # torrent client
       qview # image viewer
       networkmanagerapplet # tray icon for networking connection

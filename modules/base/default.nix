@@ -41,8 +41,27 @@ args@{ lib, pkgs, variables, device, ... }:
     networkmanager.enable = true;
     firewall = {
       enable = true;
-      allowedTCPPorts = [];
-      allowedUDPPorts = [];
+
+      # 7 Days to Die / Steam server ports:
+      # Game server (UDP 26900 IN)
+      # Steam communication (UDP 26901 IN)
+      # Networking (LiteNetLib) (UDP 26902 IN)
+      # Query port (Steam) (TCP 26900 IN)
+      # Server list registration (UDP 27000-27050 OUT)
+
+      allowedTCPPorts = [
+        26900 # Query port (Steam)
+      ];
+      allowedUDPPorts = [
+        26900 # Game server
+        26901 # Steam communication
+        26902 # Networking (LiteNetLib)
+      ];
+      allowedUDPPortRanges = [
+        { from = 27000; to = 27050; } # Server list registration (OUT)
+      ];
+      # Note: NixOS firewall does not distinguish IN/OUT for allowed ports,
+      # so this will allow UDP 27000-27050 both directions.
     };
   };
 
