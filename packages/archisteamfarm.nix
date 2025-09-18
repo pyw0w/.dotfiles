@@ -10,7 +10,7 @@ stdenv.mkDerivation rec {
 
   src = fetchurl {
     url = "https://github.com/JustArchiNET/ArchiSteamFarm/releases/download/${version}/ASF-linux-x64.zip";
-    sha256 = "1x58v1wxfwbymsxhpmfxbi35kvsznq3724rr07bk7aqvplcbx1qn";
+    sha256 = "2U2wcH5poYD+F60M74RDy1B8pz/CRyLfK4x+F3nVvps=";
   };
 
   nativeBuildInputs = [ unzip makeWrapper ];
