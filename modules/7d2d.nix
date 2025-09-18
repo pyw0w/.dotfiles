@@ -9,8 +9,8 @@ lib.mkModule "7d2d" config {
     wantedBy = [ "multi-user.target" ];
 
     serviceConfig = {
-      User = "pyw0w";
-      Group = "users";
+      User = variables.username;
+      Group = variables.username;
       WorkingDirectory = "/opt/7d2d-server";
       ExecStart = "/opt/7d2d-server/startserver.sh -configfile=serverconfig.xml -logfile /opt/7d2d-server/dedicated.log";
       Restart = "always";

@@ -33,5 +33,6 @@
     ./intellij.nix
     ./n8n.nix
     ./zerotier.nix
+    ./archisteamfarm.nix
   ];
 }

@@ -131,6 +131,7 @@ args@{ lib, pkgs, variables, device, ... }:
     devtools.ollama.enable = true;
     devtools.nodejs.enable = false;
     devtools.docker.enable = false;
+    archisteamfarm.enable = true;
   };
 
   # load dev environment from directory
