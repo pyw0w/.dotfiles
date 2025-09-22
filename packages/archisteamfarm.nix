@@ -1,4 +1,4 @@
-{ lib, stdenv, fetchurl, unzip, dotnetCorePackages, makeWrapper }:
+{ lib, stdenv, fetchurl, unzip, makeWrapper, icu, zlib, openssl, libkrb5 }:
 
 let
   version = "6.2.1.2";
@@ -14,18 +14,26 @@ stdenv.mkDerivation rec {
   };
 
   nativeBuildInputs = [ unzip makeWrapper ];
-  buildInputs = [ dotnetCorePackages.runtime_8_0 ];
+  
+  # Add required runtime dependencies
+  buildInputs = [ icu zlib openssl libkrb5 ];
+
   sourceRoot = ".";
 
   installPhase = ''
     runHook preInstall
     mkdir -p $out/bin
     mkdir -p $out/share/archisteamfarm
+    
+    # Copy all files to the share directory
     cp -r * $out/share/archisteamfarm/
-    makeWrapper ${dotnetCorePackages.runtime_8_0}/bin/dotnet $out/bin/ArchiSteamFarm \
-      --add-flags "$out/share/archisteamfarm/ArchiSteamFarm.dll" \
-      --set DOTNET_ROOT ${dotnetCorePackages.runtime_8_0}
+    
+    # Create a wrapper script that sets up the environment
+    makeWrapper $out/share/archisteamfarm/ArchiSteamFarm $out/bin/ArchiSteamFarm \
+      --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath [ icu zlib openssl libkrb5 ]}
+    
     ln -s $out/bin/ArchiSteamFarm $out/bin/asf
+    
     runHook postInstall
   '';
 

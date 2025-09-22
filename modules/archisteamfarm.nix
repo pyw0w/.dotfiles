@@ -23,12 +23,24 @@ args@{ lib, pkgs, variables, device, config, ... }:
         Restart = "on-failure";
         RestartSec = 10;
         
-        # Security settings
+        # Environment variables to control ASF behavior
+        Environment = [
+          "ASF_PATH=/home/${variables.username}/.config/archisteamfarm"
+          "ASF_CONFIG_PATH=/home/${variables.username}/.config/archisteamfarm/config"
+          "ASF_LOG_PATH=/home/${variables.username}/.config/archisteamfarm/logs"
+          "ASF_PLUGINS_PATH=/home/${variables.username}/.config/archisteamfarm/plugins"
+        ];
+        
+        # Less restrictive security settings to allow file access
         NoNewPrivileges = true;
-        PrivateTmp = true;
-        ProtectSystem = "strict";
-        ProtectHome = "read-only";
-        ReadWritePaths = "/home/${variables.username}/.config/archisteamfarm";
+        PrivateTmp = false;
+        ProtectSystem = false;
+        ProtectHome = false;
+        ReadWritePaths = [
+          "/home/${variables.username}/.config/archisteamfarm"
+          "/home/${variables.username}/.local/share/archisteamfarm"
+          "/tmp"
+        ];
       };
     };
 
@@ -38,6 +50,7 @@ args@{ lib, pkgs, variables, device, config, ... }:
       "d /home/${variables.username}/.config/archisteamfarm/config 0755 ${variables.username} ${variables.username} -"
       "d /home/${variables.username}/.config/archisteamfarm/logs 0755 ${variables.username} ${variables.username} -"
       "d /home/${variables.username}/.config/archisteamfarm/plugins 0755 ${variables.username} ${variables.username} -"
+      "d /home/${variables.username}/.local/share/archisteamfarm 0755 ${variables.username} ${variables.username} -"
     ];
   };
 }
