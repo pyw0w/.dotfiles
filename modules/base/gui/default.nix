@@ -125,6 +125,7 @@ args@{ config, lib, pkgs, variables, ... }:
       discord.enable = true;
       cursor.enable = true;
       zed.enable = true;
+      warp-terminal.enable = false;
     };
 
     services.xserver.enable = true;

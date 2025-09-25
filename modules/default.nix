@@ -24,6 +24,7 @@
     ./fastfetch.nix
     ./nautilus.nix
     ./nvidia.nix
+    ./opentabletdriver.nix
     ./piper.nix
     ./playerctl.nix
     ./steam.nix
@@ -34,5 +35,6 @@
     ./n8n.nix
     ./zerotier.nix
     ./archisteamfarm.nix
+    ./warp-terminal.nix
   ];
 }

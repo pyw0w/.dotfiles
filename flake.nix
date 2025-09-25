@@ -25,6 +25,7 @@
       inputs.home-manager.follows = "home-manager"; };
     ashell = { url = "github:MalpenZibo/ashell";
       inputs.nixpkgs.follows = "nixpkgs"; };
+    nix-gaming = { url = "github:fufexan/nix-gaming"; };
   };
   outputs = inputs@{ self, ... }:
   let

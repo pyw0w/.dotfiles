@@ -1,4 +1,4 @@
-args@{ lib, pkgs, variables, device, ... }:
+args@{ lib, pkgs, variables, device, inputs, ... }:
 {
   # other base modules can be enabled if desired
   imports = [
@@ -120,6 +120,10 @@ args@{ lib, pkgs, variables, device, ... }:
     nix-output-monitor # prettier output of nix commands
     cbonsai # ascii art bonsai
     asciiquarium-transparent # ascii art aquarium
+
+    # osu! games from nix-gaming
+    inputs.nix-gaming.packages.${pkgs.system}.osu-lazer-bin  # osu! lazer (binary version)
+    inputs.nix-gaming.packages.${pkgs.system}.osu-stable     # osu! stable (wine version)
   ];
 
   local = {

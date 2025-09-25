@@ -11,7 +11,7 @@ lib.mkModule "discord" config {
       enable = true;
       # disable discord (enabled by default)
       discord = {
-        enable = true;
+        enable = false;
         openASAR.enable = false;
         vencord = {
           enable = false;

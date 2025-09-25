@@ -10,7 +10,7 @@ in
 lib.mkModule "hyprland" config {
   programs.hyprland = {
     enable = true;
-          package = hypr-pkgs.hyprland;
+    package = hypr-pkgs.hyprland;
     portalPackage = hypr-pkgs.xdg-desktop-portal-hyprland;
   };
   services.displayManager.defaultSession = "hyprland";
