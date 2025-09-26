@@ -1,0 +1,26 @@
+title: NixOS Gaming Dotfiles
+description: Современная конфигурация NixOS с поддержкой игр и графических планшетов
+author: pyw0w
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+
+# Настройки для GitHub Pages
+baseurl: "/.dotfiles"
+url: "https://pyw0w.github.io"
+
+# Навигация
+navigation:
+  - title: Главная
+    url: /
+  - title: Установка
+    url: /install
+  - title: Конфигурация
+    url: /config
+  - title: Модули
+    url: /modules
+
+# Социальные ссылки
+social:
+  github: pyw0w

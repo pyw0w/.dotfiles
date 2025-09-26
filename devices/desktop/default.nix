@@ -3,6 +3,7 @@ args@{ config, pkgs, variables, lib, ... }:
   local = {
     base.gui.full.enable = true;
     nvidia.enable = true;
+    opentabletdriver.enable = true;
     piper.enable = true;
     playerctl.enable = true;
     develnext.enable = false;
